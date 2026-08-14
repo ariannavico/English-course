@@ -58,6 +58,12 @@ export function HomePage() {
       to: "/missions/mission-missed-flight",
     },
     {
+      emoji: "🧩",
+      title: "Verb Choice Lab",
+      desc: "bring / take / carry / get? Train the instinct for the right verb.",
+      to: "/verb-lab",
+    },
+    {
       emoji: "🧠",
       title: "Fix Your Weaknesses",
       desc: "Targeted training based on the mistakes you actually make.",
