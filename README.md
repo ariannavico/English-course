@@ -1,5 +1,7 @@
 # English B1 — Verb Trainer
 
+[![CI](https://github.com/ariannavico/English-course/actions/workflows/ci.yml/badge.svg)](https://github.com/ariannavico/English-course/actions/workflows/ci.yml)
+
 A personal, offline-first learning app (React + Vite + TypeScript) for going from
 **A2 to a solid B1**, with a relentless focus on **verbs**: which verb, which
 tense, which form, which construction.
