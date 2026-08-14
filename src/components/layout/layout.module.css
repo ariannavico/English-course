@@ -28,6 +28,14 @@
   width: 30px;
   height: 30px;
 }
+.navGroup {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-subtle);
+  padding: 0.75rem 0.7rem 0.25rem;
+}
 .navLink {
   display: flex;
   align-items: center;

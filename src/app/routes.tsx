@@ -15,7 +15,19 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        lazy: () => import("@/pages/DashboardPage").then((m) => ({ Component: m.DashboardPage })),
+        lazy: () => import("@/pages/HomePage").then((m) => ({ Component: m.HomePage })),
+      },
+      {
+        path: "missions",
+        lazy: () => import("@/pages/MissionsPage").then((m) => ({ Component: m.MissionsPage })),
+      },
+      {
+        path: "missions/:missionId",
+        lazy: () => import("@/pages/MissionPage").then((m) => ({ Component: m.MissionPage })),
+      },
+      {
+        path: "progress",
+        lazy: () => import("@/pages/ProgressPage").then((m) => ({ Component: m.ProgressPage })),
       },
       {
         path: "chapters",

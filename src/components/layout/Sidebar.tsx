@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { Icon } from "@/components/ui";
 import { navItems } from "./navItems";
@@ -17,21 +18,23 @@ export function Sidebar({
     >
       <div className={styles.brand}>
         <img src="/icons/logo.svg" alt="" className={styles.brandLogo} />
-        <span>English B1</span>
+        <span>English Trainer</span>
       </div>
       {navItems.map((item) => (
-        <NavLink
-          key={item.to}
-          to={item.to}
-          end={item.to === "/"}
-          onClick={onNavigate}
-          className={({ isActive }) =>
-            `${styles.navLink} ${isActive ? styles.navLinkActive : ""}`
-          }
-        >
-          <Icon name={item.icon} size={18} />
-          {item.label}
-        </NavLink>
+        <Fragment key={item.to}>
+          {item.group && <div className={styles.navGroup}>{item.group}</div>}
+          <NavLink
+            to={item.to}
+            end={item.to === "/"}
+            onClick={onNavigate}
+            className={({ isActive }) =>
+              `${styles.navLink} ${isActive ? styles.navLinkActive : ""}`
+            }
+          >
+            <Icon name={item.icon} size={18} />
+            {item.label}
+          </NavLink>
+        </Fragment>
       ))}
     </nav>
   );

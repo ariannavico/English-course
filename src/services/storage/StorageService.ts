@@ -20,6 +20,7 @@ export const STORAGE_KEYS = {
   spacedRepetition: "spacedRepetition",
   mistakes: "mistakes",
   errorLog: "errorLog",
+  missions: "missions",
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
