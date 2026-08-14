@@ -1,0 +1,23 @@
+import type { VocabularyItem } from "@/types";
+
+/** Topic vocabulary linked to Part 4 chapters 21–26. */
+export const thematicVocabulary2: VocabularyItem[] = [
+  // Work & Study
+  { id: "vocab-degree", word: "degree", partOfSpeech: "noun", italianMeaning: "laurea", englishDefinition: "a qualification from a university.", topic: "work-study", cefrLevel: "B1", relatedVerbs: ["study"], examples: [{ id: "degree-ex1", english: "She has a degree in law.", italian: "Ha una laurea in giurisprudenza.", difficulty: "B1" }] },
+  { id: "vocab-salary", word: "salary", partOfSpeech: "noun", italianMeaning: "stipendio", englishDefinition: "the money you are paid each month for your job.", topic: "work-study", cefrLevel: "B1", relatedVerbs: ["earn"], examples: [{ id: "salary-ex1", english: "The salary is quite good.", italian: "Lo stipendio è piuttosto buono.", difficulty: "B1" }] },
+  // Home & Daily Life
+  { id: "vocab-housework", word: "housework", partOfSpeech: "noun", italianMeaning: "lavori di casa", englishDefinition: "the work of cleaning and looking after a home (uncountable).", topic: "home-daily", cefrLevel: "A2+", relatedVerbs: ["clean", "wash"], examples: [{ id: "housework-ex1", english: "We share the housework.", italian: "Ci dividiamo i lavori di casa.", difficulty: "A2+" }] },
+  { id: "vocab-neighbour", word: "neighbour", partOfSpeech: "noun", italianMeaning: "vicino di casa", englishDefinition: "a person who lives near you.", topic: "home-daily", cefrLevel: "A2", examples: [{ id: "neighbour-ex1", english: "Our neighbours are very friendly.", italian: "I nostri vicini sono molto gentili.", difficulty: "A2" }] },
+  // Feelings & Opinions
+  { id: "vocab-opinion", word: "opinion", partOfSpeech: "noun", italianMeaning: "opinione", englishDefinition: "what you think about something.", topic: "feelings-opinions", cefrLevel: "A2+", relatedVerbs: ["believe", "agree"], examples: [{ id: "opinion-ex1", english: "In my opinion, it's a great idea.", italian: "Secondo me, è un'ottima idea.", difficulty: "A2+", highlightedWords: ["opinion"] }] },
+  { id: "vocab-mood", word: "mood", partOfSpeech: "noun", italianMeaning: "umore", englishDefinition: "the way you feel at a particular time.", topic: "feelings-opinions", cefrLevel: "B1", examples: [{ id: "mood-ex1", english: "He's in a good mood today.", italian: "Oggi è di buon umore.", difficulty: "B1" }] },
+  // Health
+  { id: "vocab-illness", word: "illness", partOfSpeech: "noun", italianMeaning: "malattia", englishDefinition: "a disease or period of being unwell.", topic: "health", cefrLevel: "B1", relatedVerbs: ["recover"], examples: [{ id: "illness-ex1", english: "He's recovering from a long illness.", italian: "Si sta riprendendo da una lunga malattia.", difficulty: "B1" }] },
+  { id: "vocab-medicine", word: "medicine", partOfSpeech: "noun", italianMeaning: "medicina, farmaco", englishDefinition: "something you take to treat an illness.", topic: "health", cefrLevel: "A2+", examples: [{ id: "medicine-ex1", english: "Take this medicine twice a day.", italian: "Prendi questa medicina due volte al giorno.", difficulty: "A2+" }] },
+  // Money & Shopping
+  { id: "vocab-bill", word: "bill", partOfSpeech: "noun", italianMeaning: "conto, bolletta", englishDefinition: "a piece of paper showing how much you must pay.", topic: "money-shopping", cefrLevel: "A2", relatedVerbs: ["pay"], examples: [{ id: "bill-ex1", english: "Can we have the bill, please?", italian: "Possiamo avere il conto, per favore?", difficulty: "A2", highlightedWords: ["bill"] }] },
+  { id: "vocab-discount", word: "discount", partOfSpeech: "noun", italianMeaning: "sconto", englishDefinition: "a reduction in the normal price.", topic: "money-shopping", cefrLevel: "B1", relatedVerbs: ["save"], examples: [{ id: "discount-ex1", english: "There's a 20% discount today.", italian: "Oggi c'è uno sconto del 20%.", difficulty: "B1" }] },
+  // Technology
+  { id: "vocab-app", word: "app", partOfSpeech: "noun", italianMeaning: "app, applicazione", englishDefinition: "a program you use on a phone or computer.", topic: "technology", cefrLevel: "A2", relatedVerbs: ["download", "update"], examples: [{ id: "app-ex1", english: "This app helps me learn English.", italian: "Questa app mi aiuta a imparare l'inglese.", difficulty: "A2", highlightedWords: ["app"] }] },
+  { id: "vocab-deadline", word: "deadline", partOfSpeech: "noun", italianMeaning: "scadenza", englishDefinition: "the time by which something must be done.", topic: "technology", cefrLevel: "B1", relatedVerbs: ["plan"], examples: [{ id: "deadline-ex1", english: "The deadline is next Friday.", italian: "La scadenza è venerdì prossimo.", difficulty: "B1" }] },
+];

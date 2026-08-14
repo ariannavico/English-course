@@ -1,0 +1,240 @@
+/* Shared styles for the UI primitive kit (Button, Card, Badge, ...). */
+
+/* ---- Button ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  padding: 0.55rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.05s ease;
+  background: var(--surface-2);
+  color: var(--text);
+  line-height: 1.1;
+}
+.btn:hover:not(:disabled) {
+  background: var(--border);
+}
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.primary {
+  background: var(--primary);
+  color: var(--primary-contrast);
+}
+.primary:hover:not(:disabled) {
+  background: var(--blue-600);
+}
+.ghost {
+  background: transparent;
+  border-color: var(--border);
+}
+.ghost:hover:not(:disabled) {
+  background: var(--surface-2);
+}
+.danger {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+.sm {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.85rem;
+}
+.block {
+  width: 100%;
+}
+
+/* ---- Card ---- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+.cardPad0 {
+  padding: 0;
+}
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.cardTitle {
+  font-size: 1.05rem;
+  font-weight: 650;
+  margin: 0;
+}
+
+/* ---- Badge ---- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--r-full);
+  font-size: 0.75rem;
+  font-weight: 650;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+.badgePrimary {
+  background: var(--primary-soft);
+  color: var(--primary);
+  border-color: transparent;
+}
+.badgeSuccess {
+  background: var(--success-soft);
+  color: var(--success);
+  border-color: transparent;
+}
+.badgeDanger {
+  background: var(--danger-soft);
+  color: var(--danger);
+  border-color: transparent;
+}
+.badgeWarning {
+  background: var(--warning-soft);
+  color: var(--warning);
+  border-color: transparent;
+}
+
+/* ---- ProgressBar ---- */
+.progress {
+  width: 100%;
+  height: 10px;
+  background: var(--surface-2);
+  border-radius: var(--r-full);
+  overflow: hidden;
+}
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: var(--r-full);
+  transition: width 0.4s ease;
+}
+
+/* ---- Tabs ---- */
+.tabList {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.tab {
+  appearance: none;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.6rem 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.tab:hover {
+  color: var(--text);
+}
+.tabActive {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+.tabPanel {
+  padding-top: 1rem;
+}
+
+/* ---- Accordion ---- */
+.accItem {
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--surface);
+}
+.accItem + .accItem {
+  margin-top: 0.5rem;
+}
+.accTrigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.85rem 1rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: left;
+}
+.accTrigger:hover {
+  background: var(--surface-2);
+}
+.accChevron {
+  transition: transform 0.15s ease;
+  color: var(--text-subtle);
+}
+.accChevronOpen {
+  transform: rotate(90deg);
+}
+.accBody {
+  padding: 0 1rem 1rem;
+}
+
+/* ---- Modal ---- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 50;
+}
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+  max-width: 560px;
+  width: 100%;
+  max-height: 85vh;
+  overflow: auto;
+  padding: 1.5rem;
+}
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.iconBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 0.25rem;
+  border-radius: var(--r-sm);
+  line-height: 0;
+}
+.iconBtn:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}

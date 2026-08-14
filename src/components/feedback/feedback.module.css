@@ -1,0 +1,58 @@
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--r-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.correct {
+  background: var(--success-soft);
+  color: var(--success);
+}
+.wrong {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+.neutral {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.explanation {
+  background: var(--surface-2);
+  border-left: 3px solid var(--primary);
+  border-radius: var(--r-sm);
+  padding: 0.6rem 0.85rem;
+}
+.explanation p {
+  margin: 0.2rem 0 0;
+  color: var(--text);
+}
+.explanationLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-subtle);
+}
+
+.score {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.scoreValue {
+  font-size: 2.4rem;
+  font-weight: 750;
+  color: var(--primary);
+  line-height: 1;
+}
+.scoreMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}

@@ -1,0 +1,113 @@
+.formsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.6rem;
+}
+.formCell {
+  background: var(--surface-2);
+  border-radius: var(--r-md);
+  padding: 0.6rem 0.75rem;
+  text-align: center;
+}
+.formLabel {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-subtle);
+  font-weight: 700;
+}
+.formValue {
+  font-size: 1.05rem;
+  font-weight: 650;
+  margin-top: 0.15rem;
+}
+
+.meaning + .meaning {
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+.meaningHead {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.italian {
+  color: var(--primary);
+  font-weight: 650;
+}
+.context {
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+  padding: 0.5rem 0.7rem;
+  font-size: 0.9rem;
+  margin-top: 0.4rem;
+}
+
+.example {
+  padding: 0.55rem 0.75rem;
+  border-left: 3px solid var(--accent);
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+}
+.example + .example {
+  margin-top: 0.5rem;
+}
+.exampleEn {
+  font-size: 1rem;
+}
+.exampleIt {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.hl {
+  background: var(--primary-soft);
+  color: var(--primary);
+  border-radius: 3px;
+  padding: 0 2px;
+  font-weight: 650;
+}
+
+.collocation {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.collocation:last-child {
+  border-bottom: none;
+}
+.collPhrase {
+  font-weight: 650;
+}
+
+.similar {
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 0.75rem 0.9rem;
+}
+.similar + .similar {
+  margin-top: 0.6rem;
+}
+
+.grammarBlock + .grammarBlock {
+  margin-top: 0.75rem;
+}
+.grammarHeading {
+  font-weight: 650;
+  margin-bottom: 0.2rem;
+}
+
+.pvHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.pvPhrase {
+  font-size: 1.1rem;
+  font-weight: 700;
+}

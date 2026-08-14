@@ -1,0 +1,90 @@
+.pageHeader {
+  margin-bottom: 1.25rem;
+}
+.pageHeader p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.cardsGrid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.list {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.tile {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 0.85rem 1rem;
+  background: var(--surface);
+  color: var(--text);
+}
+.tile:hover {
+  border-color: var(--primary);
+  text-decoration: none;
+}
+.tileLocked {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.tileRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.tileTitle {
+  font-weight: 650;
+}
+
+.partHeading {
+  margin: 1.5rem 0 0.5rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-subtle);
+  font-weight: 700;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.field {
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.settingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.settingRow:last-child {
+  border-bottom: none;
+}
+
+.patternGroup + .patternGroup {
+  margin-top: 1rem;
+}
+.patternRow {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  padding: 0.3rem 0;
+}
