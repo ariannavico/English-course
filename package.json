@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "validate:data": "vitest run src/test/dataValidation.test.ts"
+    "validate:data": "vitest run src/test/dataValidation.test.ts",
+    "deploy": "npm run build && npx firebase-tools deploy --only hosting"
   },
   "dependencies": {
     "react": "^18.3.1",
