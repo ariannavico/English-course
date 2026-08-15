@@ -20,6 +20,7 @@ export const navItems: NavItem[] = [
 
   { to: "/missions", label: "Missions", icon: "target", group: "Practice", mobile: true },
   { to: "/fluency", label: "Fluency", icon: "flame" },
+  { to: "/paraphrase", label: "Paraphrase", icon: "repeat" },
   { to: "/verb-lab", label: "Verb Lab", icon: "grid" },
   { to: "/practice", label: "Quick Practice", icon: "grid", mobile: true },
   { to: "/review", label: "Review", icon: "repeat", mobile: true },

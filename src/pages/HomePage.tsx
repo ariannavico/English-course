@@ -70,6 +70,12 @@ export function HomePage() {
       to: "/verb-lab",
     },
     {
+      emoji: "🔤",
+      title: "Get Around The Word",
+      desc: "Can't find the word? Explain it another way — never freeze again.",
+      to: "/paraphrase",
+    },
+    {
       emoji: "🧠",
       title: "Fix Your Weaknesses",
       desc: "Targeted training based on the mistakes you actually make.",
