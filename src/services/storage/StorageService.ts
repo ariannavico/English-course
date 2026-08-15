@@ -21,6 +21,7 @@ export const STORAGE_KEYS = {
   mistakes: "mistakes",
   errorLog: "errorLog",
   missions: "missions",
+  fluency: "fluency",
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];

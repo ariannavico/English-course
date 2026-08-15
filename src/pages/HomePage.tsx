@@ -48,8 +48,14 @@ export function HomePage() {
     {
       emoji: "🗣",
       title: "Speak",
-      desc: "Say it out loud in a real conversation and get feedback.",
+      desc: "Say it out loud in a real conversation (job interview mission).",
       to: "/missions/mission-job-interview",
+    },
+    {
+      emoji: "⏱",
+      title: "Fluency Mode",
+      desc: "Beat the clock — 30/60/90s prompts that train speed and spontaneity.",
+      to: "/fluency",
     },
     {
       emoji: "👂",

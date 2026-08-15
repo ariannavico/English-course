@@ -1,0 +1,172 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Level select */
+.levels {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+.level {
+  text-align: left;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  padding: 1rem;
+  cursor: pointer;
+}
+.level:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+.levelTime {
+  font-size: 1.6rem;
+  font-weight: 750;
+  color: var(--primary);
+}
+.levelName {
+  font-weight: 650;
+  margin-top: 0.15rem;
+}
+.levelDesc {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+/* Timer */
+.timerRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.timer {
+  font-size: 2.6rem;
+  font-weight: 750;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  min-width: 3ch;
+}
+.timerLow {
+  color: var(--danger);
+  animation: eb1-tick 1s steps(1) infinite;
+}
+@keyframes eb1-tick {
+  50% {
+    opacity: 0.55;
+  }
+}
+.timerBar {
+  flex: 1;
+  height: 8px;
+  background: var(--surface-2);
+  border-radius: var(--r-full);
+  overflow: hidden;
+}
+.timerFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: width 1s linear;
+}
+.timerFillLow {
+  background: var(--danger);
+}
+
+.prompt {
+  font-size: 1.35rem;
+  font-weight: 650;
+  line-height: 1.4;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+}
+.chip {
+  font-size: 0.8rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--r-full);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.chipUsed {
+  background: var(--success-soft);
+  color: var(--success);
+  border-color: transparent;
+}
+.textarea {
+  width: 100%;
+  min-height: 130px;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  resize: vertical;
+}
+.count {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-subtle);
+  font-size: 0.85rem;
+}
+.toolRow {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.listening {
+  color: var(--danger);
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.pulse {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--danger);
+  animation: eb1-tick 1s steps(1) infinite;
+}
+
+/* Reflect + summary */
+.metrics {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.metric {
+  background: var(--surface-2);
+  border-radius: var(--r-md);
+  padding: 0.6rem 0.9rem;
+  text-align: center;
+  flex: 1;
+  min-width: 90px;
+}
+.metricVal {
+  font-size: 1.5rem;
+  font-weight: 750;
+}
+.metricLabel {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+.rate {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.bigScore {
+  font-size: 2.8rem;
+  font-weight: 750;
+  color: var(--primary);
+  line-height: 1;
+}

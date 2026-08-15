@@ -30,6 +30,10 @@ export const router = createBrowserRouter([
         lazy: () => import("@/pages/ProgressPage").then((m) => ({ Component: m.ProgressPage })),
       },
       {
+        path: "fluency",
+        lazy: () => import("@/pages/FluencyPage").then((m) => ({ Component: m.FluencyPage })),
+      },
+      {
         path: "verb-lab",
         lazy: () => import("@/pages/VerbLabPage").then((m) => ({ Component: m.VerbLabPage })),
       },
