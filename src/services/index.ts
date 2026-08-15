@@ -12,6 +12,7 @@ import { searchService } from "./search/SearchService";
 import { MissionService } from "./missions/MissionService";
 import { FluencyService } from "./fluency/FluencyService";
 import { ParaphraseService } from "./paraphrase/ParaphraseService";
+import { StoryService } from "./story/StoryService";
 import { evaluationService } from "./evaluation/EvaluationService";
 import { speechService } from "./speech/SpeechService";
 import { WeaknessService } from "./learning/WeaknessService";
@@ -23,6 +24,7 @@ export const exerciseService = new ExerciseService(spacedRepetitionService);
 export const missionService = new MissionService(storage);
 export const fluencyService = new FluencyService(storage);
 export const paraphraseService = new ParaphraseService(storage);
+export const storyService = new StoryService(storage);
 
 /** exerciseId -> tags, for weakness detection. Built once from the content registry. */
 const exerciseTags: Record<string, string[]> = Object.fromEntries(

@@ -76,6 +76,12 @@ export function HomePage() {
       to: "/paraphrase",
     },
     {
+      emoji: "📖",
+      title: "Story Mode",
+      desc: "Live through 'New in London' — a story that recycles what you learn.",
+      to: "/story",
+    },
+    {
       emoji: "🧠",
       title: "Fix Your Weaknesses",
       desc: "Targeted training based on the mistakes you actually make.",

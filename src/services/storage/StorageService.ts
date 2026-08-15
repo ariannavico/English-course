@@ -23,6 +23,7 @@ export const STORAGE_KEYS = {
   missions: "missions",
   fluency: "fluency",
   paraphrase: "paraphrase",
+  story: "story",
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
