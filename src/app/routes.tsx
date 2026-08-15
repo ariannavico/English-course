@@ -38,6 +38,18 @@ export const router = createBrowserRouter([
         lazy: () => import("@/pages/VerbUniversePage").then((m) => ({ Component: m.VerbUniversePage })),
       },
       {
+        path: "weaknesses",
+        lazy: () => import("@/pages/WeaknessesPage").then((m) => ({ Component: m.WeaknessesPage })),
+      },
+      {
+        path: "micro-lessons",
+        lazy: () => import("@/pages/MicroLessonsPage").then((m) => ({ Component: m.MicroLessonsPage })),
+      },
+      {
+        path: "micro-lessons/:lessonId",
+        lazy: () => import("@/pages/MicroLessonPage").then((m) => ({ Component: m.MicroLessonPage })),
+      },
+      {
         path: "chapters",
         lazy: () => import("@/pages/ChaptersPage").then((m) => ({ Component: m.ChaptersPage })),
       },

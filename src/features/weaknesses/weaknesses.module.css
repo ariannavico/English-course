@@ -1,0 +1,86 @@
+.hunter {
+  border: 1px solid var(--warning);
+  background: var(--warning-soft);
+  border-radius: var(--r-lg);
+  padding: 1.25rem;
+}
+.hunterLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--warning);
+}
+.hunterTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 0.25rem 0;
+}
+.hunterPattern {
+  color: var(--text-muted);
+  margin: 0 0 0.75rem;
+}
+.accuracy {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.85rem;
+}
+.accuracyBig {
+  font-size: 1.8rem;
+  font-weight: 750;
+}
+.recos {
+  display: grid;
+  gap: 0.4rem;
+}
+.reco {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  color: var(--text);
+  font-weight: 600;
+}
+.reco:hover {
+  border-color: var(--primary);
+  text-decoration: none;
+}
+
+.areaRow {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.areaRow:last-child {
+  border-bottom: none;
+}
+.areaBar {
+  grid-column: 1 / -1;
+}
+
+/* Micro-lesson */
+.lessonBlock + .lessonBlock {
+  margin-top: 0.85rem;
+}
+.rule {
+  border-left: 3px solid var(--success);
+  background: var(--success-soft);
+  color: var(--success);
+  border-radius: var(--r-sm);
+  padding: 0.6rem 0.85rem;
+  font-weight: 600;
+}
+.ex {
+  background: var(--surface-2);
+  border-radius: var(--r-sm);
+  padding: 0.4rem 0.65rem;
+  margin-top: 0.35rem;
+  font-size: 0.92rem;
+}

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Badge, Card, Icon, LinkButton } from "@/components/ui";
+import { microLessonsForSkills } from "@/data/microLessons";
 import type { Mission, MissionAttempt } from "./types";
 import type { ProduceResult } from "./ProduceStageView";
 import styles from "./missions.module.css";
@@ -21,6 +22,7 @@ export function MissionReflect({
   const flags = dedupe(results.flatMap((r) => r.evaluation.flags.map((f) => f.hint)));
   const chunksUsed = dedupe(results.flatMap((r) => r.evaluation.chunksUsed));
   const struggled = attempt.strugglingSkills;
+  const suggestedLessons = microLessonsForSkills(struggled);
 
   return (
     <div className="stack">
@@ -47,6 +49,15 @@ export function MissionReflect({
               </Badge>
             ))}
           </div>
+          {suggestedLessons.length > 0 && (
+            <div className={styles.recos} style={{ marginTop: "0.85rem" }}>
+              {suggestedLessons.map((l) => (
+                <Link key={l.id} to={`/micro-lessons/${l.id}`} className={styles.reco}>
+                  <Icon name="check" size={18} /> Fix it now: {l.title} ({l.minutes} min)
+                </Link>
+              ))}
+            </div>
+          )}
         </Card>
       )}
 

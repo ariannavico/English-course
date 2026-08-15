@@ -67,7 +67,7 @@ export function HomePage() {
       emoji: "🧠",
       title: "Fix Your Weaknesses",
       desc: "Targeted training based on the mistakes you actually make.",
-      to: "/review",
+      to: "/weaknesses",
     },
     {
       emoji: "🔥",

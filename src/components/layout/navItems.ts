@@ -31,6 +31,8 @@ export const navItems: NavItem[] = [
   { to: "/chapters", label: "Chapters", icon: "book", group: "Content" },
 
   { to: "/progress", label: "My Progress", icon: "monitor", group: "Progress", mobile: true },
+  { to: "/weaknesses", label: "Weaknesses", icon: "target" },
+  { to: "/micro-lessons", label: "Micro-lessons", icon: "check" },
   { to: "/mistakes", label: "My Mistakes", icon: "alert" },
   { to: "/settings", label: "Settings", icon: "settings" },
 ];
