@@ -37,5 +37,8 @@ export const navItems: NavItem[] = [
   { to: "/weaknesses", label: "Weaknesses", icon: "target" },
   { to: "/micro-lessons", label: "Micro-lessons", icon: "check" },
   { to: "/mistakes", label: "My Mistakes", icon: "alert" },
+
+  { to: "/assessment", label: "B2 Assessment", icon: "check", group: "Assess" },
+
   { to: "/settings", label: "Settings", icon: "settings" },
 ];

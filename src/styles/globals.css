@@ -122,6 +122,10 @@ code {
 .muted {
   color: var(--text-muted);
 }
+.grow {
+  flex: 1;
+  min-width: 220px;
+}
 .subtle {
   color: var(--text-subtle);
   font-size: 0.85rem;

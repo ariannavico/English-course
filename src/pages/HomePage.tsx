@@ -109,6 +109,12 @@ export function HomePage() {
       desc: "See what you've mastered and what's holding you back.",
       to: "/progress",
     },
+    {
+      emoji: "🎓",
+      title: "B2 Assessment",
+      desc: "A mixed check across all skills → your B2 readiness report.",
+      to: "/assessment",
+    },
   ];
 
   return (

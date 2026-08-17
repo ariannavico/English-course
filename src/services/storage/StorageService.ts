@@ -24,6 +24,7 @@ export const STORAGE_KEYS = {
   fluency: "fluency",
   paraphrase: "paraphrase",
   story: "story",
+  assessment: "assessment",
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
