@@ -76,6 +76,12 @@ export function HomePage() {
       to: "/paraphrase",
     },
     {
+      emoji: "⚖️",
+      title: "Build Your Case",
+      desc: "Defend an opinion the B2 way — claim, reason, evidence, counter, rebuttal.",
+      to: "/argumentation",
+    },
+    {
       emoji: "📖",
       title: "Story Mode",
       desc: "Live through 'New in London' — a story that recycles what you learn.",

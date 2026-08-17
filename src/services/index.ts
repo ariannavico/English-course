@@ -12,6 +12,7 @@ import { searchService } from "./search/SearchService";
 import { MissionService } from "./missions/MissionService";
 import { FluencyService } from "./fluency/FluencyService";
 import { ParaphraseService } from "./paraphrase/ParaphraseService";
+import { ArgumentationService } from "./argumentation/ArgumentationService";
 import { StoryService } from "./story/StoryService";
 import { AssessmentService } from "./assessment/AssessmentService";
 import { evaluationService } from "./evaluation/EvaluationService";
@@ -26,6 +27,7 @@ export const exerciseService = new ExerciseService(spacedRepetitionService);
 export const missionService = new MissionService(storage);
 export const fluencyService = new FluencyService(storage);
 export const paraphraseService = new ParaphraseService(storage);
+export const argumentationService = new ArgumentationService(storage);
 export const storyService = new StoryService(storage);
 export const assessmentService = new AssessmentService(storage);
 
