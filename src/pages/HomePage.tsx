@@ -5,7 +5,19 @@ import { missions as missionList } from "@/data/missions";
 import { useProgress } from "@/hooks/useProgress";
 import { useSpacedRepetition } from "@/hooks/useSpacedRepetition";
 import { useMissions } from "@/features/missions/useMissions";
+import {
+  fluencyService,
+  paraphraseService,
+  argumentationService,
+  assessmentService,
+} from "@/services";
 import styles from "./home.module.css";
+
+/** "Best 82% · 3 sessions" once a practice mode has been used, else nothing. */
+function bestMeta(p: { sessions: number; bestScore: number }): string | undefined {
+  if (p.sessions <= 0) return undefined;
+  return `Best ${p.bestScore}% · ${p.sessions} session${p.sessions === 1 ? "" : "s"}`;
+}
 
 interface Tile {
   emoji: string;
@@ -25,6 +37,12 @@ export function HomePage() {
   const { progress } = useProgress();
   const { dueItems } = useSpacedRepetition();
   const { isCompleted } = useMissions();
+
+  // Surface stored practice progress so the Home tiles reflect real activity.
+  const fluency = fluencyService.load();
+  const paraphrase = paraphraseService.load();
+  const argument = argumentationService.load();
+  const lastReport = assessmentService.loadLast();
 
   const todaysMission = missionList.find((m) => !isCompleted(m.id)) ?? missionList[0];
   const continueChapter =
@@ -56,6 +74,7 @@ export function HomePage() {
       title: "Fluency Mode",
       desc: "Beat the clock — 30/60/90s prompts that train speed and spontaneity.",
       to: "/fluency",
+      meta: bestMeta(fluency),
     },
     {
       emoji: "👂",
@@ -74,12 +93,14 @@ export function HomePage() {
       title: "Get Around The Word",
       desc: "Can't find the word? Explain it another way — never freeze again.",
       to: "/paraphrase",
+      meta: bestMeta(paraphrase),
     },
     {
       emoji: "⚖️",
       title: "Build Your Case",
       desc: "Defend an opinion the B2 way — claim, reason, evidence, counter, rebuttal.",
       to: "/argumentation",
+      meta: bestMeta(argument),
     },
     {
       emoji: "📖",
@@ -120,6 +141,7 @@ export function HomePage() {
       title: "B2 Assessment",
       desc: "A mixed check across all skills → your B2 readiness report.",
       to: "/assessment",
+      meta: lastReport ? `Last: ${lastReport.report.band} · ${lastReport.report.overall}%` : undefined,
     },
   ];
 
