@@ -8,11 +8,12 @@ import { exercises } from "@/data";
 import { useProgress } from "@/hooks/useProgress";
 import { progressService } from "@/services";
 import { useMissions } from "@/features/missions/useMissions";
+import { SkillMap } from "@/features/skillMap/SkillMap";
 import styles from "./pages.module.css";
 
 /**
- * My Progress. Today it shows overall stats, weak areas, streak and missions.
- * This is where the multi-dimensional B2 Skill Map will live (next slice).
+ * My Progress, led by the unified B2 Skill Map — one multi-dimensional read of
+ * where the learner stands, backed by the streak, overall stats and weak areas.
  */
 export function ProgressPage() {
   const { progress } = useProgress();
@@ -25,6 +26,8 @@ export function ProgressPage() {
         title="My Progress"
         description="What you've mastered and what's holding you back — more useful than hours studied."
       />
+
+      <SkillMap />
 
       <div className={styles.cardsGrid}>
         <Card title="Streak">
@@ -44,15 +47,9 @@ export function ProgressPage() {
         <ProgressOverview stats={progress.overallStats} />
       </Card>
 
-      <Card title="Weak areas">
+      <Card title="Weak areas (by tag)">
         <SkillProgress skills={weak} />
       </Card>
-
-      <p className="subtle">
-        A full B2 Skill Map (Grammar · Vocabulary · Verbs · Listening · Speaking ·
-        Fluency · Paraphrasing · Argumentation) is coming — it will read from the
-        same signals your missions and exercises already record.
-      </p>
     </div>
   );
 }

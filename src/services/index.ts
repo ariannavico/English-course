@@ -3,7 +3,7 @@
  * dependencies (storage impl, content counts). Swap the storage implementation
  * here to migrate the whole app to IndexedDB/backend later.
  */
-import { exercises } from "@/data";
+import { exercises, verbs } from "@/data";
 import { storage } from "./storage/LocalStorageService";
 import { ProgressService } from "./progress/ProgressService";
 import { SpacedRepetitionService } from "./spacedRepetition/SpacedRepetitionService";
@@ -16,6 +16,7 @@ import { StoryService } from "./story/StoryService";
 import { evaluationService } from "./evaluation/EvaluationService";
 import { speechService } from "./speech/SpeechService";
 import { WeaknessService } from "./learning/WeaknessService";
+import { SkillProfileService, classifyTags } from "./skillProfile/SkillProfileService";
 import { microLessons } from "@/data/microLessons";
 
 export const progressService = new ProgressService(storage, exercises.length);
@@ -31,6 +32,13 @@ const exerciseTags: Record<string, string[]> = Object.fromEntries(
   exercises.map((e) => [e.id, e.tags]),
 );
 export const weaknessService = new WeaknessService(exerciseTags, microLessons);
+
+/** exerciseId -> skill-profile dimension keys, classified from tags once. */
+const verbIdSet = new Set(verbs.map((v) => v.id));
+const exerciseDims: Record<string, string[]> = Object.fromEntries(
+  exercises.map((e) => [e.id, classifyTags(e.tags, verbIdSet)]),
+);
+export const skillProfileService = new SkillProfileService(exerciseDims);
 
 export { searchService, storage, evaluationService, speechService };
 export { grade } from "./exercises/ExerciseService";
