@@ -239,5 +239,77 @@ export const newInLondon: Story = {
         },
       ],
     },
+    {
+      id: "london-ep5",
+      number: 5,
+      title: "A fair split",
+      emoji: "🧾",
+      summary: "The first shared bill arrives — higher than expected. You and your flatmate have to agree on a fair way to split it.",
+      focus: ["expressing opinions", "agreeing and disagreeing politely", "negotiating"],
+      estimatedMinutes: 10,
+      beats: [
+        {
+          kind: "brief",
+          id: "ep5-b1",
+          label: "The situation",
+          text: "The first energy bill lands on the doormat — £180, much higher than either of you expected. Your flatmate glances at it and says, “Shall we just split it fifty-fifty?” But you were away travelling for ten days this month, so it doesn't feel quite fair.",
+          italianHint: "La bolletta è più alta del previsto. Il coinquilino propone 50/50, ma tu eri via 10 giorni.",
+          audio: true,
+        },
+        {
+          kind: "produce",
+          id: "ep5-b2",
+          label: "Say what you think — nicely",
+          prompt:
+            "Give your opinion on how to split it. Make your point and back it up with a reason, without sounding difficult.",
+          italianContext: "Dì la tua su come dividere la bolletta, con un motivo, senza sembrare polemico.",
+          targetSkills: ["expressing opinions", "giving reasons", "being diplomatic"],
+          suggestedChunks: ["I see what you mean, but...", "The thing is...", "Wouldn't it be fairer if...?"],
+          keyElements: ["away", "fair", "think"],
+          modelAnswer:
+            "I see what you mean, and normally fifty-fifty is easiest. The thing is, I was away for ten days this month, so I don't think it's quite fair for me to pay the full half. Wouldn't it be fairer to work it out roughly by the days we were each here?",
+          naturalnessNotes: [
+            "“I see what you mean, but…” concedes first, then disagrees — the polite B2 way to push back.",
+            "A rhetorical “Wouldn't it be fairer if…?” is softer than “You should…”.",
+          ],
+          allowSpeech: true,
+        },
+        {
+          kind: "brief",
+          id: "ep5-b3",
+          label: "Your flatmate replies",
+          speaker: "Flatmate",
+          text: "“Yeah, that's fair enough, actually. Although working out the exact days every month sounds like a hassle. How about this: you pay a bit less this time because you were away, but normally we just keep it simple and go halves?”",
+          audio: true,
+        },
+        {
+          kind: "choice",
+          id: "ep5-b4",
+          label: "Decide",
+          prompt: "Your flatmate has met you halfway. How do you respond?",
+          options: [
+            { id: "accept", text: "Accept the compromise happily", feedback: "Gracious: “That sounds really fair — thanks for being flexible about it.”" },
+            { id: "track", text: "Suggest a simple app to track shared bills", feedback: "Practical: “Why don't we use a splitting app? Then it's fair and no hassle.”" },
+            { id: "cap", text: "Agree, but suggest setting a budget to keep bills down", feedback: "Forward-thinking: “Deal — and maybe we set a limit so it doesn't get this high again?”" },
+          ],
+          followUpWhy: "Say why you chose that — one sentence.",
+        },
+        {
+          kind: "produce",
+          id: "ep5-b5",
+          label: "Close the deal",
+          prompt:
+            "Wrap it up warmly: agree on the plan, thank them for being reasonable, and suggest something to keep things easy between you from now on.",
+          italianContext: "Chiudi l'accordo con cordialità e proponi un modo per gestire le spese in futuro.",
+          targetSkills: ["reaching agreement", "conceding then countering", "being warm"],
+          suggestedChunks: ["That works for me.", "I really appreciate you...", "Why don't we...?"],
+          keyElements: ["agree", "appreciate", "future"],
+          modelAnswer:
+            "That works for me — thanks, I really appreciate you being reasonable about it. Why don't we set up a shared note for the bills, so next time it's all clear and we never have to have this conversation again? Deal?",
+          naturalnessNotes: ["Ending on a light “Deal?” keeps a negotiation friendly rather than transactional."],
+          allowSpeech: true,
+        },
+      ],
+    },
   ],
 };

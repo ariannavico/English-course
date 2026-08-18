@@ -136,6 +136,80 @@ export const microLessons: MicroLesson[] = [
     ],
     practiceExerciseIds: ["ex-use-usedto-1", "ex-rev2-usedto-1"],
   },
+  {
+    id: "have-vs-get",
+    emoji: "🤲",
+    title: "HAVE vs GET",
+    problem: "You mix up have and get.",
+    minutes: 3,
+    addressesTags: ["have", "get"],
+    relatedUniverse: "have",
+    keyRule: "GET = the action of obtaining. HAVE = the state of possessing. First you get it, then you have it.",
+    explanation: [
+      {
+        text: "GET is the moment something comes to you; HAVE is owning it afterwards.",
+        examples: ["I got a new phone yesterday. (the action)", "I have a new phone. (the state now)"],
+      },
+      {
+        text: "GET also means 'become' before an adjective — a change of state, never HAVE.",
+        examples: ["It's getting cold. (NOT it's having cold)", "I got tired."],
+      },
+      {
+        text: "For food and drink, English uses HAVE, not GET or TAKE.",
+        examples: ["I'll have a coffee.", "We had lunch at one."],
+      },
+    ],
+    practiceExerciseIds: ["ex-have-vs-get-1", "ex-get-vs-take-1", "ex-have-collocation-1"],
+  },
+  {
+    id: "come-vs-go",
+    emoji: "↔️",
+    title: "COME vs GO",
+    problem: "You can't decide between come and go.",
+    minutes: 3,
+    addressesTags: ["come", "go"],
+    relatedUniverse: "come",
+    keyRule: "COME = towards the speaker or the listener. GO = away from here to somewhere else.",
+    explanation: [
+      {
+        text: "It's about direction. If the movement is towards the person you're talking to, use COME.",
+        examples: ["Can I come to your place? (towards you)", "I'm going to the shops. (away from here)"],
+      },
+      {
+        text: "Italian 'venire/andare' don't map one-to-one: when you join the listener, English says COME.",
+        examples: ["“Are you coming to the party?” “Yes, I'll come.” (NOT I'll go)"],
+      },
+      {
+        text: "GO often marks a change to a worse state, too.",
+        examples: ["The milk has gone off.", "The screen went black."],
+      },
+    ],
+    practiceExerciseIds: ["ex-come-vs-go-1", "ex-go-mixed-1"],
+  },
+  {
+    id: "will-vs-going-to",
+    emoji: "🔮",
+    title: "WILL vs GOING TO",
+    problem: "You're unsure whether to use will or going to for the future.",
+    minutes: 4,
+    addressesTags: ["will", "going-to", "future"],
+    keyRule: "'going to' = a plan already made, or evidence you can see now. 'will' = a decision as you speak, or a prediction.",
+    explanation: [
+      {
+        text: "Use 'going to' when the intention existed before you spoke — the plan is already there.",
+        examples: ["We're going to paint the kitchen this weekend. (decided already)"],
+      },
+      {
+        text: "Use 'will' for a decision made at the moment of speaking, offers and promises.",
+        examples: ["“The phone's ringing.” “I'll get it.” (decided now)", "I'll help you, I promise."],
+      },
+      {
+        text: "For predictions: 'going to' when there's evidence now; 'will' for a general belief.",
+        examples: ["Look at those clouds — it's going to rain. (evidence)", "I think it will rain tomorrow. (belief)"],
+      },
+    ],
+    practiceExerciseIds: ["ex-ch6-willvsgoing-1", "ex-rev2-future-1", "ex-ch6-translation-1"],
+  },
 ];
 
 const byId = new Map(microLessons.map((l) => [l.id, l]));
