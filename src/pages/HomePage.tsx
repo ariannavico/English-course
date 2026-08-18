@@ -10,7 +10,9 @@ import {
   paraphraseService,
   argumentationService,
   assessmentService,
+  placementService,
 } from "@/services";
+import { buildRoutingPlan } from "@/features/placement/placement";
 import styles from "./home.module.css";
 
 /** "Best 82% · 3 sessions" once a practice mode has been used, else nothing. */
@@ -43,6 +45,9 @@ export function HomePage() {
   const paraphrase = paraphraseService.load();
   const argument = argumentationService.load();
   const lastReport = assessmentService.loadLast();
+  const placement = placementService.load();
+  const plan = placement ? buildRoutingPlan(placement.band) : null;
+  const firstStep = plan?.steps[0];
 
   const todaysMission = missionList.find((m) => !isCompleted(m.id)) ?? missionList[0];
   const continueChapter =
@@ -151,6 +156,32 @@ export function HomePage() {
         <h1>What do you want to do today?</h1>
         <p>Do something in English. Make mistakes. Get better.</p>
       </div>
+
+      {plan && firstStep ? (
+        <Link to={firstStep.to} className={styles.plan}>
+          <span className={styles.planIcon}>🧭</span>
+          <span className={styles.planBody}>
+            <span className={styles.planKicker}>
+              Your plan · you placed <strong>{placement!.band}</strong>
+            </span>
+            <span className={styles.planText}>
+              {plan.headline} Start with <strong>{firstStep.title}</strong>.
+            </span>
+          </span>
+          <span className={styles.planGo}>Start →</span>
+        </Link>
+      ) : (
+        <Link to="/placement" className={styles.plan}>
+          <span className={styles.planIcon}>🧭</span>
+          <span className={styles.planBody}>
+            <span className={styles.planKicker}>New here?</span>
+            <span className={styles.planText}>
+              Take a 2-minute placement and get a plan built around your level.
+            </span>
+          </span>
+          <span className={styles.planGo}>Find my level →</span>
+        </Link>
+      )}
 
       <div className={styles.strip}>
         <Link to={`/chapters/${continueChapter.id}`} className={styles.stripItem}>

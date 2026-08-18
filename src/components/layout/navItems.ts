@@ -39,7 +39,8 @@ export const navItems: NavItem[] = [
   { to: "/micro-lessons", label: "Micro-lessons", icon: "check" },
   { to: "/mistakes", label: "My Mistakes", icon: "alert" },
 
-  { to: "/assessment", label: "B2 Assessment", icon: "check", group: "Assess" },
+  { to: "/placement", label: "Find Your Level", icon: "target", group: "Assess" },
+  { to: "/assessment", label: "B2 Assessment", icon: "check" },
 
   { to: "/settings", label: "Settings", icon: "settings" },
 ];
