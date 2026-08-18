@@ -13,6 +13,7 @@ import {
   placementService,
   socialService,
   registerService,
+  writingService,
 } from "@/services";
 import { buildRoutingPlan } from "@/features/placement/placement";
 import styles from "./home.module.css";
@@ -48,6 +49,7 @@ export function HomePage() {
   const argument = argumentationService.load();
   const social = socialService.load();
   const register = registerService.load();
+  const writing = writingService.load();
   const lastReport = assessmentService.loadLast();
   const placement = placementService.load();
   const plan = placement ? buildRoutingPlan(placement.band) : null;
@@ -124,6 +126,13 @@ export function HomePage() {
       desc: "Say it three ways — nail the tone for a friend, a colleague, or a formal email.",
       to: "/register",
       meta: bestMeta(register),
+    },
+    {
+      emoji: "✍️",
+      title: "Writing Studio",
+      desc: "Emails, reviews, opinions — write for the reader, hit the right tone and length.",
+      to: "/writing",
+      meta: writing.sessions > 0 ? `Best ${writing.bestScore}% · ${writing.sessions} piece${writing.sessions === 1 ? "" : "s"}` : undefined,
     },
     {
       emoji: "📖",
