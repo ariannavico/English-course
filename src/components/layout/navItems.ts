@@ -23,6 +23,7 @@ export const navItems: NavItem[] = [
   { to: "/paraphrase", label: "Paraphrase", icon: "repeat" },
   { to: "/argumentation", label: "Build Your Case", icon: "layers" },
   { to: "/social", label: "Keep It Going", icon: "target" },
+  { to: "/register", label: "Register Lab", icon: "layers" },
   { to: "/story", label: "Story Mode", icon: "book" },
   { to: "/verb-lab", label: "Verb Lab", icon: "grid" },
   { to: "/practice", label: "Quick Practice", icon: "grid", mobile: true },

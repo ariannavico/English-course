@@ -15,6 +15,7 @@ import { ParaphraseService } from "./paraphrase/ParaphraseService";
 import { ArgumentationService } from "./argumentation/ArgumentationService";
 import { PlacementService } from "./placement/PlacementService";
 import { SocialService } from "./social/SocialService";
+import { RegisterService } from "./register/RegisterService";
 import { StoryService } from "./story/StoryService";
 import { AssessmentService } from "./assessment/AssessmentService";
 import { evaluationService } from "./evaluation/EvaluationService";
@@ -32,6 +33,7 @@ export const paraphraseService = new ParaphraseService(storage);
 export const argumentationService = new ArgumentationService(storage);
 export const placementService = new PlacementService(storage);
 export const socialService = new SocialService(storage);
+export const registerService = new RegisterService(storage);
 export const storyService = new StoryService(storage);
 export const assessmentService = new AssessmentService(storage);
 

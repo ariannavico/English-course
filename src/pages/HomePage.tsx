@@ -12,6 +12,7 @@ import {
   assessmentService,
   placementService,
   socialService,
+  registerService,
 } from "@/services";
 import { buildRoutingPlan } from "@/features/placement/placement";
 import styles from "./home.module.css";
@@ -46,6 +47,7 @@ export function HomePage() {
   const paraphrase = paraphraseService.load();
   const argument = argumentationService.load();
   const social = socialService.load();
+  const register = registerService.load();
   const lastReport = assessmentService.loadLast();
   const placement = placementService.load();
   const plan = placement ? buildRoutingPlan(placement.band) : null;
@@ -115,6 +117,13 @@ export function HomePage() {
       desc: "React, make small talk, take your turn, close gracefully — real conversation moves.",
       to: "/social",
       meta: bestMeta(social),
+    },
+    {
+      emoji: "🎚️",
+      title: "Register Lab",
+      desc: "Say it three ways — nail the tone for a friend, a colleague, or a formal email.",
+      to: "/register",
+      meta: bestMeta(register),
     },
     {
       emoji: "📖",
