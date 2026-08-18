@@ -11,6 +11,7 @@ import {
   argumentationService,
   assessmentService,
   placementService,
+  socialService,
 } from "@/services";
 import { buildRoutingPlan } from "@/features/placement/placement";
 import styles from "./home.module.css";
@@ -44,6 +45,7 @@ export function HomePage() {
   const fluency = fluencyService.load();
   const paraphrase = paraphraseService.load();
   const argument = argumentationService.load();
+  const social = socialService.load();
   const lastReport = assessmentService.loadLast();
   const placement = placementService.load();
   const plan = placement ? buildRoutingPlan(placement.band) : null;
@@ -106,6 +108,13 @@ export function HomePage() {
       desc: "Defend an opinion the B2 way — claim, reason, evidence, counter, rebuttal.",
       to: "/argumentation",
       meta: bestMeta(argument),
+    },
+    {
+      emoji: "💬",
+      title: "Keep It Going",
+      desc: "React, make small talk, take your turn, close gracefully — real conversation moves.",
+      to: "/social",
+      meta: bestMeta(social),
     },
     {
       emoji: "📖",
