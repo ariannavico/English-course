@@ -1,6 +1,7 @@
 import { Icon } from "@/components/ui";
 import { useTheme } from "@/hooks/useTheme";
 import { GlobalSearch } from "./GlobalSearch";
+import { AccountMenu } from "./AccountMenu";
 import styles from "./layout.module.css";
 
 const themeIcon = { light: "sun", dark: "moon", system: "monitor" } as const;
@@ -27,6 +28,7 @@ export function Header({ onToggleMenu }: { onToggleMenu: () => void }) {
         >
           <Icon name={themeIcon[theme]} size={20} />
         </button>
+        <AccountMenu />
       </div>
     </header>
   );
