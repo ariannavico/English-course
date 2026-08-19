@@ -14,6 +14,7 @@ import {
   socialService,
   registerService,
   writingService,
+  collocationService,
 } from "@/services";
 import { buildRoutingPlan } from "@/features/placement/placement";
 import styles from "./home.module.css";
@@ -50,6 +51,7 @@ export function HomePage() {
   const social = socialService.load();
   const register = registerService.load();
   const writing = writingService.load();
+  const collocations = collocationService.load();
   const lastReport = assessmentService.loadLast();
   const placement = placementService.load();
   const plan = placement ? buildRoutingPlan(placement.band) : null;
@@ -133,6 +135,13 @@ export function HomePage() {
       desc: "Emails, reviews, opinions — write for the reader, hit the right tone and length.",
       to: "/writing",
       meta: writing.sessions > 0 ? `Best ${writing.bestScore}% · ${writing.sessions} piece${writing.sessions === 1 ? "" : "s"}` : undefined,
+    },
+    {
+      emoji: "🧱",
+      title: "Speak in Chunks",
+      desc: "Heavy traffic, make a decision, good at — recall the natural word pairings.",
+      to: "/collocations",
+      meta: bestMeta(collocations),
     },
     {
       emoji: "📖",

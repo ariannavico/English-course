@@ -30,6 +30,7 @@ export const STORAGE_KEYS = {
   social: "social",
   register: "register",
   writing: "writing",
+  collocations: "collocations",
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
