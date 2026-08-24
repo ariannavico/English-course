@@ -37,6 +37,7 @@ export const navItems: NavItem[] = [
   { to: "/collocations", label: "Speak in Chunks", icon: "layers" },
   { to: "/paraphrase", label: "Paraphrase", icon: "repeat" },
   { to: "/natural", label: "Sound Natural", icon: "flame" },
+  { to: "/word-families", label: "Word Families", icon: "layers" },
 
   // Listening.
   { to: "/listening", label: "Train Your Ear", icon: "monitor", group: "Listening" },

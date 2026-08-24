@@ -1,0 +1,148 @@
+import type { WordItem } from "@/features/wordFamilies/types";
+
+/** Word-family items, three per target part of speech. The answer transforms the base into the form the sentence needs. */
+export const wordFamilyItems: WordItem[] = [
+  /* ---------------- produce the NOUN ---------------- */
+  {
+    id: "wf-decision",
+    targetPOS: "noun",
+    emoji: "⚖️",
+    base: "decide",
+    prompt: "After a long discussion, they finally reached a ___.",
+    answer: "decision",
+    family: ["decide (v)", "decision (n)", "decisive (adj)", "decisively (adv)"],
+    gloss: "decidere → decisione",
+    level: "B1",
+  },
+  {
+    id: "wf-strength",
+    targetPOS: "noun",
+    emoji: "💪",
+    base: "strong",
+    prompt: "It takes real ___ to admit you were wrong.",
+    answer: "strength",
+    family: ["strong (adj)", "strength (n)", "strengthen (v)", "strongly (adv)"],
+    gloss: "forte → forza",
+    level: "B1+",
+  },
+  {
+    id: "wf-success",
+    targetPOS: "noun",
+    emoji: "🏆",
+    base: "succeed",
+    prompt: "The launch was a huge ___.",
+    answer: "success",
+    family: ["succeed (v)", "success (n)", "successful (adj)", "successfully (adv)"],
+    gloss: "riuscire → successo",
+    level: "B1+",
+  },
+
+  /* ---------------- produce the VERB ---------------- */
+  {
+    id: "wf-decide",
+    targetPOS: "verb",
+    emoji: "🤔",
+    base: "decision",
+    prompt: "You need to ___ what you want by Friday.",
+    answer: "decide",
+    family: ["decision (n)", "decide (v)", "decisive (adj)", "decisively (adv)"],
+    gloss: "decisione → decidere",
+    level: "B1",
+  },
+  {
+    id: "wf-create",
+    targetPOS: "verb",
+    emoji: "🎨",
+    base: "creation",
+    prompt: "Great artists ___ something out of nothing.",
+    answer: "create",
+    family: ["creation (n)", "create (v)", "creative (adj)", "creatively (adv)"],
+    gloss: "creazione → creare",
+    level: "B1+",
+  },
+  {
+    id: "wf-lengthen",
+    targetPOS: "verb",
+    emoji: "📏",
+    base: "length",
+    prompt: "They decided to ___ the meeting by half an hour.",
+    answer: "lengthen",
+    family: ["length (n)", "lengthen (v)", "long (adj)", "lengthy (adj)"],
+    gloss: "lunghezza → allungare",
+    level: "B2",
+  },
+
+  /* ---------------- produce the ADJECTIVE ---------------- */
+  {
+    id: "wf-dangerous",
+    targetPOS: "adjective",
+    emoji: "⚠️",
+    base: "danger",
+    prompt: "That road is really ___ at night.",
+    answer: "dangerous",
+    family: ["danger (n)", "endanger (v)", "dangerous (adj)", "dangerously (adv)"],
+    gloss: "pericolo → pericoloso",
+    level: "B1",
+  },
+  {
+    id: "wf-healthy",
+    targetPOS: "adjective",
+    emoji: "🥗",
+    base: "health",
+    prompt: "She eats a very ___ diet.",
+    answer: "healthy",
+    family: ["health (n)", "healthy (adj)", "unhealthy (adj)", "healthily (adv)"],
+    gloss: "salute → sano",
+    level: "B1",
+  },
+  {
+    id: "wf-careful",
+    targetPOS: "adjective",
+    emoji: "🧐",
+    base: "care",
+    prompt: "Please be ___ with those glasses.",
+    answer: "careful",
+    family: ["care (n/v)", "careful (adj)", "careless (adj)", "carefully (adv)"],
+    gloss: "cura → attento",
+    level: "B1",
+  },
+
+  /* ---------------- produce the ADVERB ---------------- */
+  {
+    id: "wf-carefully",
+    targetPOS: "adverb",
+    emoji: "🚗",
+    base: "careful",
+    prompt: "He drove ___ through the thick fog.",
+    answer: "carefully",
+    family: ["care (n/v)", "careful (adj)", "carefully (adv)"],
+    gloss: "attento → con attenzione",
+    level: "B1",
+  },
+  {
+    id: "wf-easily",
+    targetPOS: "adverb",
+    emoji: "😌",
+    base: "easy",
+    prompt: "She passed the exam ___.",
+    answer: "easily",
+    family: ["ease (n)", "easy (adj)", "easily (adv)"],
+    gloss: "facile → facilmente",
+    level: "B1",
+  },
+  {
+    id: "wf-successfully",
+    targetPOS: "adverb",
+    emoji: "🚀",
+    base: "success",
+    prompt: "They ___ launched the product last week.",
+    answer: "successfully",
+    family: ["success (n)", "succeed (v)", "successful (adj)", "successfully (adv)"],
+    gloss: "successo → con successo",
+    level: "B1+",
+  },
+];
+
+export function getWordFamilyItem(id: string): WordItem | undefined {
+  return wordFamilyItems.find((i) => i.id === id);
+}
