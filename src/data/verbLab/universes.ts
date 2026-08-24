@@ -188,6 +188,117 @@ export const verbUniverses: VerbUniverse[] = [
       { verb: "get", difference: "BRING = carry it to someone; GET = obtain or fetch it." },
     ],
   },
+  {
+    id: "put",
+    verb: "put",
+    coreIdea: "PUT = move something to a position — place it somewhere, literally or figuratively.",
+    senses: [
+      { sense: "place", gloss: "mettere, posare", example: "Put the keys on the table." },
+      { sense: "express / phrase", gloss: "esprimere, dire", example: "How can I put this politely?" },
+      { sense: "cause to be in a state", gloss: "mettere (in una condizione)", example: "It put me in a good mood." },
+      { sense: "fixed uses", gloss: "espressioni fisse", example: "put pressure on, put an end to, put money aside" },
+    ],
+    phrasals: [
+      { phrase: "put on", meaning: "indossare / accendere / mettere su (peso)" },
+      { phrase: "put off", meaning: "rimandare / scoraggiare" },
+      { phrase: "put up with", meaning: "sopportare" },
+      { phrase: "put out", meaning: "spegnere / dare fastidio" },
+      { phrase: "put away", meaning: "mettere via / riordinare" },
+    ],
+    confusedWith: [
+      { verb: "set", difference: "PUT = place anywhere; SET = place carefully/precisely, or make ready." },
+      { verb: "lay", difference: "PUT is general; LAY puts something down flat (lay it on the bed)." },
+    ],
+  },
+  {
+    id: "set",
+    verb: "set",
+    coreIdea: "SET = place something carefully and make it ready or fixed in position.",
+    senses: [
+      { sense: "place carefully", gloss: "collocare, sistemare", example: "She set the vase on the shelf." },
+      { sense: "make ready / arrange", gloss: "preparare, predisporre", example: "Set the table for dinner." },
+      { sense: "fix / decide", gloss: "fissare, stabilire", example: "Let's set a date." },
+      { sense: "become solid", gloss: "solidificarsi", example: "Wait for the jelly to set." },
+      { sense: "of the sun", gloss: "tramontare", example: "The sun sets at eight." },
+    ],
+    phrasals: [
+      { phrase: "set up", meaning: "creare, organizzare / installare" },
+      { phrase: "set off", meaning: "partire / far scattare (allarme)" },
+      { phrase: "set out", meaning: "mettersi in viaggio / esporre (un piano)" },
+      { phrase: "set about", meaning: "mettersi a fare" },
+      { phrase: "set back", meaning: "ritardare / costare (informale)" },
+    ],
+    confusedWith: [
+      { verb: "put", difference: "SET = place with care or make ready; PUT = simply place somewhere." },
+      { verb: "sit", difference: "You SET something down (transitive); a person SITS down (intransitive)." },
+    ],
+  },
+  {
+    id: "keep",
+    verb: "keep",
+    coreIdea: "KEEP = make something continue — hold on to it, or carry on doing it.",
+    senses: [
+      { sense: "retain / hold on to", gloss: "tenere, conservare", example: "You can keep the change." },
+      { sense: "continue (keep + -ing)", gloss: "continuare a", example: "She keeps interrupting me." },
+      { sense: "stay / cause to stay", gloss: "mantenere (in uno stato)", example: "Keep calm. / It keeps me warm." },
+      { sense: "store", gloss: "tenere (in un posto)", example: "Where do you keep the mugs?" },
+      { sense: "fixed uses", gloss: "espressioni fisse", example: "keep a promise, keep a secret, keep in touch" },
+    ],
+    phrasals: [
+      { phrase: "keep on", meaning: "continuare a" },
+      { phrase: "keep up (with)", meaning: "stare al passo (con)" },
+      { phrase: "keep away / off", meaning: "stare lontano / non toccare" },
+      { phrase: "keep out", meaning: "tenere/stare fuori" },
+    ],
+    confusedWith: [
+      { verb: "hold", difference: "KEEP = have it over time / continue; HOLD = grip it right now." },
+      { verb: "stay", difference: "KEEP can be transitive (keep it warm); STAY is only intransitive (stay warm)." },
+    ],
+  },
+  {
+    id: "hold",
+    verb: "hold",
+    coreIdea: "HOLD = grip or support something now, and stop it moving or ending.",
+    senses: [
+      { sense: "grip in your hands", gloss: "tenere in mano", example: "Hold my bag for a second." },
+      { sense: "contain / have capacity", gloss: "contenere", example: "This jug holds two litres." },
+      { sense: "organise (an event)", gloss: "tenere (un evento)", example: "They held a meeting." },
+      { sense: "keep in a state / pause", gloss: "mantenere / mettere in attesa", example: "Hold the door. / Can you hold (the line)?" },
+      { sense: "fixed uses", gloss: "espressioni fisse", example: "hold hands, hold your breath, hold a record" },
+    ],
+    phrasals: [
+      { phrase: "hold on", meaning: "aspettare / aggrapparsi" },
+      { phrase: "hold up", meaning: "ritardare / rapinare" },
+      { phrase: "hold back", meaning: "trattenere / esitare" },
+      { phrase: "hold out", meaning: "resistere / porgere" },
+    ],
+    confusedWith: [
+      { verb: "keep", difference: "HOLD = grip it right now; KEEP = have it over time." },
+      { verb: "carry", difference: "HOLD = support it in place; CARRY = hold it while moving." },
+    ],
+  },
+  {
+    id: "give",
+    verb: "give",
+    coreIdea: "GIVE = cause something to pass from you to someone else.",
+    senses: [
+      { sense: "hand over", gloss: "dare, consegnare", example: "Give me your hand." },
+      { sense: "provide / cause", gloss: "dare, procurare", example: "It gave me a headache." },
+      { sense: "produce an action", gloss: "fare (un'azione)", example: "give a speech, give a smile, give it a try" },
+      { sense: "yield / collapse", gloss: "cedere", example: "The shelf gave under the weight." },
+    ],
+    phrasals: [
+      { phrase: "give up", meaning: "arrendersi / smettere" },
+      { phrase: "give in", meaning: "cedere, arrendersi" },
+      { phrase: "give away", meaning: "regalare / svelare" },
+      { phrase: "give back", meaning: "restituire" },
+      { phrase: "give out", meaning: "distribuire / esaurirsi" },
+    ],
+    confusedWith: [
+      { verb: "offer", difference: "GIVE completes the transfer; OFFER only proposes it (you can offer without giving)." },
+      { verb: "make", difference: "You GIVE a speech but MAKE a decision — learn the collocations." },
+    ],
+  },
 ];
 
 const byId = new Map(verbUniverses.map((u) => [u.id, u]));
