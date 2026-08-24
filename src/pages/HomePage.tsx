@@ -16,6 +16,7 @@ import {
   writingService,
   collocationService,
   naturalService,
+  listeningService,
 } from "@/services";
 import { buildRoutingPlan } from "@/features/placement/placement";
 import styles from "./home.module.css";
@@ -54,6 +55,7 @@ export function HomePage() {
   const writing = writingService.load();
   const collocations = collocationService.load();
   const natural = naturalService.load();
+  const listening = listeningService.load();
   const lastReport = assessmentService.loadLast();
   const placement = placementService.load();
   const plan = placement ? buildRoutingPlan(placement.band) : null;
@@ -93,9 +95,10 @@ export function HomePage() {
     },
     {
       emoji: "👂",
-      title: "Listen",
-      desc: "Train your ear on natural English inside a situation.",
-      to: "/missions/mission-missed-flight",
+      title: "Train Your Ear",
+      desc: "Climb from clear to fast, reduced speech (gonna, d'you) — real-world listening.",
+      to: "/listening",
+      meta: bestMeta(listening),
     },
     {
       emoji: "🧩",

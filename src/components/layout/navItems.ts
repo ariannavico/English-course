@@ -27,6 +27,7 @@ export const navItems: NavItem[] = [
   { to: "/writing", label: "Writing Studio", icon: "list" },
   { to: "/collocations", label: "Speak in Chunks", icon: "grid" },
   { to: "/natural", label: "Sound Natural", icon: "flame" },
+  { to: "/listening", label: "Train Your Ear", icon: "monitor" },
   { to: "/story", label: "Story Mode", icon: "book" },
   { to: "/verb-lab", label: "Verb Lab", icon: "grid" },
   { to: "/practice", label: "Quick Practice", icon: "grid", mobile: true },
