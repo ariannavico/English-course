@@ -20,6 +20,7 @@ import { WritingService } from "./writing/WritingService";
 import { CollocationService } from "./collocations/CollocationService";
 import { NaturalService } from "./natural/NaturalService";
 import { ListeningService } from "./listening/ListeningService";
+import { DialogueService } from "./dialogues/DialogueService";
 import { StoryService } from "./story/StoryService";
 import { AssessmentService } from "./assessment/AssessmentService";
 import { evaluationService } from "./evaluation/EvaluationService";
@@ -42,6 +43,7 @@ export const writingService = new WritingService(storage);
 export const collocationService = new CollocationService(storage);
 export const naturalService = new NaturalService(storage);
 export const listeningService = new ListeningService(storage);
+export const dialogueService = new DialogueService(storage);
 export const storyService = new StoryService(storage);
 export const assessmentService = new AssessmentService(storage);
 

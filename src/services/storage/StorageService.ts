@@ -33,6 +33,7 @@ export const STORAGE_KEYS = {
   collocations: "collocations",
   natural: "natural",
   listening: "listening",
+  dialogues: "dialogues",
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];

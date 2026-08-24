@@ -17,6 +17,7 @@ import {
   collocationService,
   naturalService,
   listeningService,
+  dialogueService,
 } from "@/services";
 import { buildRoutingPlan } from "@/features/placement/placement";
 import styles from "./home.module.css";
@@ -56,6 +57,7 @@ export function HomePage() {
   const collocations = collocationService.load();
   const natural = naturalService.load();
   const listening = listeningService.load();
+  const dialogues = dialogueService.load();
   const lastReport = assessmentService.loadLast();
   const placement = placementService.load();
   const plan = placement ? buildRoutingPlan(placement.band) : null;
@@ -99,6 +101,13 @@ export function HomePage() {
       desc: "Climb from clear to fast, reduced speech (gonna, d'you) — real-world listening.",
       to: "/listening",
       meta: bestMeta(listening),
+    },
+    {
+      emoji: "🗨️",
+      title: "Real Talk",
+      desc: "Follow messy speech — hesitations, cut-ins, self-corrections. Catch what they mean.",
+      to: "/real-talk",
+      meta: bestMeta(dialogues),
     },
     {
       emoji: "🧩",
