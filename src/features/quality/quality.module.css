@@ -1,0 +1,65 @@
+.headline {
+  color: var(--text-muted);
+  margin: 0 0 0.9rem;
+}
+
+.dims {
+  display: grid;
+  gap: 0.9rem;
+}
+.dim {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.2rem 0.6rem;
+  align-items: baseline;
+}
+.dimHead {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.dimLabel {
+  font-weight: 700;
+}
+.dimBand {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+  background: var(--primary-soft);
+  border-radius: var(--r-full);
+  padding: 0.1rem 0.5rem;
+}
+.dimScore {
+  font-variant-numeric: tabular-nums;
+  font-weight: 750;
+  font-size: 1.1rem;
+}
+.dimScoreNull {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-subtle);
+}
+.bar {
+  grid-column: 1 / -1;
+  height: 8px;
+  border-radius: var(--r-full);
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.bar > i {
+  display: block;
+  height: 100%;
+  border-radius: var(--r-full);
+  background: var(--success);
+}
+.note {
+  grid-column: 1 / -1;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+.note a {
+  font-weight: 600;
+}

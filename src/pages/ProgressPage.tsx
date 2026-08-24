@@ -9,6 +9,7 @@ import { useProgress } from "@/hooks/useProgress";
 import { progressService } from "@/services";
 import { useMissions } from "@/features/missions/useMissions";
 import { SkillMap } from "@/features/skillMap/SkillMap";
+import { QualityProfile } from "@/features/quality/QualityProfile";
 import styles from "./pages.module.css";
 
 /**
@@ -28,6 +29,8 @@ export function ProgressPage() {
       />
 
       <SkillMap />
+
+      <QualityProfile />
 
       <div className={styles.cardsGrid}>
         <Card title="Streak">
