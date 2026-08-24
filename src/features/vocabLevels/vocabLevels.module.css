@@ -1,0 +1,213 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.levelPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+  background: var(--primary-soft);
+  border-radius: var(--r-full);
+  padding: 0.2rem 0.6rem;
+}
+.dots {
+  display: inline-flex;
+  gap: 3px;
+}
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--border);
+}
+.dotOn {
+  background: var(--primary);
+}
+
+.taskHead {
+  text-align: center;
+  padding: 0.5rem 0;
+}
+.word {
+  font-size: 1.7rem;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+}
+.pos {
+  color: var(--text-subtle);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.definition {
+  font-size: 1.05rem;
+  text-align: center;
+  color: var(--text);
+}
+.sentence {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  text-align: center;
+}
+.gap {
+  display: inline-block;
+  min-width: 4rem;
+  border-bottom: 2px solid var(--primary);
+  text-align: center;
+  font-weight: 700;
+  color: var(--primary);
+}
+.hint {
+  text-align: center;
+  color: var(--text-subtle);
+  font-size: 0.85rem;
+}
+
+.options {
+  display: grid;
+  gap: 0.5rem;
+}
+.option {
+  text-align: left;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+.option:hover:not(:disabled) {
+  border-color: var(--primary);
+}
+.option:disabled {
+  cursor: default;
+}
+.optionBest {
+  border-color: transparent;
+  background: var(--success-soft);
+  color: var(--success);
+  font-weight: 600;
+}
+.optionWrong {
+  border-color: transparent;
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.inputRow {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.input {
+  flex: 1;
+  min-width: 140px;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+}
+
+.verdict {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: var(--r-md);
+  padding: 0.55rem 0.8rem;
+  font-weight: 600;
+}
+.verdictOk {
+  background: var(--success-soft);
+  color: var(--success);
+}
+.verdictNo {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+.promo {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.reveal {
+  background: var(--surface-2);
+  border-radius: var(--r-md);
+  padding: 0.75rem 0.9rem;
+}
+.revealWord {
+  font-weight: 750;
+  font-size: 1.1rem;
+}
+.revealDef {
+  color: var(--text-muted);
+  margin: 0.15rem 0 0;
+}
+.revealEx {
+  margin: 0.4rem 0 0;
+  font-style: italic;
+}
+.gloss {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0.4rem 0 0;
+}
+
+.toolRow {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* result — the ladder */
+.bigScore {
+  font-size: 2.4rem;
+  font-weight: 750;
+  color: var(--primary);
+  line-height: 1;
+}
+.ladder {
+  display: grid;
+  gap: 0.5rem;
+}
+.rung {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr auto;
+  align-items: center;
+  gap: 0.6rem;
+}
+.rungLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.rungBar {
+  height: 10px;
+  border-radius: var(--r-full);
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.rungBar > i {
+  display: block;
+  height: 100%;
+  border-radius: var(--r-full);
+  background: var(--primary);
+}
+.rungActive > i {
+  background: var(--success);
+}
+.rungVal {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}

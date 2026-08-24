@@ -19,7 +19,9 @@ import {
   listeningService,
   dialogueService,
   wordFamilyService,
+  vocabLevelsService,
 } from "@/services";
+import { activeVocabItems } from "@/data/activeVocab";
 import { buildRoutingPlan } from "@/features/placement/placement";
 import styles from "./home.module.css";
 
@@ -60,6 +62,7 @@ export function HomePage() {
   const listening = listeningService.load();
   const dialogues = dialogueService.load();
   const wordFamilies = wordFamilyService.load();
+  const activeVocabCount = activeVocabItems.filter((i) => vocabLevelsService.levelOf(i.id) >= 4).length;
   const lastReport = assessmentService.loadLast();
   const placement = placementService.load();
   const plan = placement ? buildRoutingPlan(placement.band) : null;
@@ -165,6 +168,13 @@ export function HomePage() {
       desc: "decide → decision → decisive → decisively — flex a word into every form.",
       to: "/word-families",
       meta: bestMeta(wordFamilies),
+    },
+    {
+      emoji: "🔓",
+      title: "Activate Vocab",
+      desc: "Move words from 'I've seen it' to 'I use it' — recognise, produce, recall.",
+      to: "/activate-vocab",
+      meta: activeVocabCount > 0 ? `${activeVocabCount}/${activeVocabItems.length} activating` : undefined,
     },
     {
       emoji: "🪄",
