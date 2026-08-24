@@ -23,6 +23,7 @@ import { ListeningService } from "./listening/ListeningService";
 import { DialogueService } from "./dialogues/DialogueService";
 import { WordFamilyService } from "./wordFamilies/WordFamilyService";
 import { VocabLevelsService } from "./vocabLevels/VocabLevelsService";
+import { ProjectService } from "./projects/ProjectService";
 import { StoryService } from "./story/StoryService";
 import { AssessmentService } from "./assessment/AssessmentService";
 import { evaluationService } from "./evaluation/EvaluationService";
@@ -48,6 +49,7 @@ export const listeningService = new ListeningService(storage);
 export const dialogueService = new DialogueService(storage);
 export const wordFamilyService = new WordFamilyService(storage);
 export const vocabLevelsService = new VocabLevelsService(storage);
+export const projectService = new ProjectService(storage);
 export const storyService = new StoryService(storage);
 export const assessmentService = new AssessmentService(storage);
 

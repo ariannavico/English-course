@@ -25,6 +25,7 @@ export const navItems: NavItem[] = [
   { to: "/missions", label: "Missions", icon: "target", group: "Practice", mobile: true },
   { to: "/practice", label: "Quick Practice", icon: "grid", mobile: true },
   { to: "/review", label: "Review", icon: "repeat", mobile: true },
+  { to: "/projects", label: "Projects", icon: "grid" },
   { to: "/story", label: "Story Mode", icon: "book" },
 
   // Speaking & interaction.

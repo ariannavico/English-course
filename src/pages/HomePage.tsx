@@ -20,8 +20,10 @@ import {
   dialogueService,
   wordFamilyService,
   vocabLevelsService,
+  projectService,
 } from "@/services";
 import { activeVocabItems } from "@/data/activeVocab";
+import { projects } from "@/data/projects";
 import { buildRoutingPlan } from "@/features/placement/placement";
 import styles from "./home.module.css";
 
@@ -63,6 +65,10 @@ export function HomePage() {
   const dialogues = dialogueService.load();
   const wordFamilies = wordFamilyService.load();
   const activeVocabCount = activeVocabItems.filter((i) => vocabLevelsService.levelOf(i.id) >= 4).length;
+  const projectsDone = projects.filter((p) => {
+    const pr = projectService.progress(p.id, p.steps.map((s) => s.id));
+    return pr.done >= pr.total;
+  }).length;
   const lastReport = assessmentService.loadLast();
   const placement = placementService.load();
   const plan = placement ? buildRoutingPlan(placement.band) : null;
@@ -133,6 +139,13 @@ export function HomePage() {
       desc: "Defend an opinion the B2 way — claim, reason, evidence, counter, rebuttal.",
       to: "/argumentation",
       meta: bestMeta(argument),
+    },
+    {
+      emoji: "🧭",
+      title: "Projects",
+      desc: "Plan a trip, apply for a job — bigger multi-step tasks, resumable any time.",
+      to: "/projects",
+      meta: projectsDone > 0 ? `${projectsDone}/${projects.length} completed` : undefined,
     },
     {
       emoji: "💬",

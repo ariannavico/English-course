@@ -36,6 +36,7 @@ export const STORAGE_KEYS = {
   dialogues: "dialogues",
   wordFamilies: "wordFamilies",
   vocabLevels: "vocabLevels",
+  projects: "projects",
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
