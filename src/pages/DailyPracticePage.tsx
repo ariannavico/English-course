@@ -20,17 +20,22 @@ export function DailyPracticePage() {
       exerciseService.buildDailySession(progress, {
         size: settings.dailyGoal,
         pool: exercises,
+        b2Mode: settings.b2Mode,
       }),
     // seed forces a fresh selection; progress keeps priorities current
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [seed, settings.dailyGoal],
+    [seed, settings.dailyGoal, settings.b2Mode],
   );
 
   return (
     <div className="stack">
       <PageHeader
         title="Daily practice"
-        description={`Your ${settings.dailyGoal}-exercise set, built from weak spots and due reviews.`}
+        description={
+          settings.b2Mode
+            ? `Your ${settings.dailyGoal}-exercise set — B2 Mode: production first.`
+            : `Your ${settings.dailyGoal}-exercise set, built from weak spots and due reviews.`
+        }
         actions={
           <Button
             onClick={() => {

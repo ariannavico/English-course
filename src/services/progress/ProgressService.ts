@@ -21,6 +21,7 @@ export const DEFAULT_SETTINGS: UserSettings = {
   showItalian: true,
   dailyGoal: 10,
   reducedMotion: false,
+  b2Mode: false,
 };
 
 export function emptyProgress(): UserProgress {

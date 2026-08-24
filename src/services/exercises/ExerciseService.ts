@@ -113,6 +113,27 @@ function gradeMatching(
 export interface SessionOptions {
   size?: number;
   pool: Exercise[];
+  /** B2 Mode (spec §47): prefer production exercises, push MC/translation back. */
+  b2Mode?: boolean;
+}
+
+/**
+ * How much an exercise kind trains PRODUCTION (lower = more production, and
+ * preferred under B2 Mode). Open-output kinds rank 0; recognition (multiple-
+ * choice family, matching) rank 1; translation ranks 2 — §47 reduces it most.
+ */
+export function productionRank(kind: Exercise["data"]["kind"]): number {
+  switch (kind) {
+    case "fill-blank":
+    case "error-correction":
+    case "sentence-builder":
+    case "situation":
+      return 0;
+    case "translation":
+      return 2;
+    default: // multiple-choice, verb-choice, tense-choice, matching
+      return 1;
+  }
 }
 
 /**
@@ -141,7 +162,15 @@ export class ExerciseService {
     const ordered: Exercise[] = [];
     for (const priority of [1, 2, 3, 4, 5]) {
       const list = buckets.get(priority);
-      if (list) ordered.push(...shuffle(list));
+      if (!list) continue;
+      let bucket = shuffle(list);
+      // B2 Mode: within a priority bucket, float production exercises to the
+      // front so they fill the session first (Array.sort is stable, keeping the
+      // shuffle's variety among equal ranks).
+      if (opts.b2Mode) {
+        bucket = [...bucket].sort((a, b) => productionRank(a.data.kind) - productionRank(b.data.kind));
+      }
+      ordered.push(...bucket);
     }
 
     // De-dup (defensive) and cap.

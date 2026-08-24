@@ -70,6 +70,22 @@ export function SettingsPage() {
             ))}
           </select>
         </div>
+        <div className={styles.settingRow}>
+          <div>
+            <div style={{ fontWeight: 600 }}>B2 Mode</div>
+            <div className="subtle">
+              Production first — daily practice prefers open-output exercises over
+              multiple-choice and translation.
+            </div>
+          </div>
+          <Button
+            size="sm"
+            variant={settings.b2Mode ? "primary" : "default"}
+            onClick={() => updateSettings({ b2Mode: !settings.b2Mode })}
+          >
+            {settings.b2Mode ? "On" : "Off"}
+          </Button>
+        </div>
       </Card>
 
       <Card title="Data">
