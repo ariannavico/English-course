@@ -18,6 +18,7 @@ import { SocialService } from "./social/SocialService";
 import { RegisterService } from "./register/RegisterService";
 import { WritingService } from "./writing/WritingService";
 import { CollocationService } from "./collocations/CollocationService";
+import { NaturalService } from "./natural/NaturalService";
 import { StoryService } from "./story/StoryService";
 import { AssessmentService } from "./assessment/AssessmentService";
 import { evaluationService } from "./evaluation/EvaluationService";
@@ -38,6 +39,7 @@ export const socialService = new SocialService(storage);
 export const registerService = new RegisterService(storage);
 export const writingService = new WritingService(storage);
 export const collocationService = new CollocationService(storage);
+export const naturalService = new NaturalService(storage);
 export const storyService = new StoryService(storage);
 export const assessmentService = new AssessmentService(storage);
 

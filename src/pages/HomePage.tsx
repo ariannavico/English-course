@@ -15,6 +15,7 @@ import {
   registerService,
   writingService,
   collocationService,
+  naturalService,
 } from "@/services";
 import { buildRoutingPlan } from "@/features/placement/placement";
 import styles from "./home.module.css";
@@ -52,6 +53,7 @@ export function HomePage() {
   const register = registerService.load();
   const writing = writingService.load();
   const collocations = collocationService.load();
+  const natural = naturalService.load();
   const lastReport = assessmentService.loadLast();
   const placement = placementService.load();
   const plan = placement ? buildRoutingPlan(placement.band) : null;
@@ -142,6 +144,13 @@ export function HomePage() {
       desc: "Heavy traffic, make a decision, good at — recall the natural word pairings.",
       to: "/collocations",
       meta: bestMeta(collocations),
+    },
+    {
+      emoji: "🪄",
+      title: "Sound Natural",
+      desc: "Correct vs natural — spot what a native says, not the textbook translation.",
+      to: "/natural",
+      meta: bestMeta(natural),
     },
     {
       emoji: "📖",
