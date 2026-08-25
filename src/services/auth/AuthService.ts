@@ -37,7 +37,9 @@ export class AuthService {
     void (async () => {
       const fb = await getFirebase();
       if (!fb || cancelled) return;
-      const { onAuthStateChanged } = await import("firebase/auth");
+      const { onAuthStateChanged, getRedirectResult } = await import("firebase/auth");
+      // Finalise a pending redirect sign-in (also drives onAuthStateChanged).
+      getRedirectResult(fb.auth).catch(() => {});
       unsub = onAuthStateChanged(fb.auth, (u) => listener(u ? toAuthUser(u) : null));
     })();
     return () => {
@@ -49,9 +51,21 @@ export class AuthService {
   async signInWithGoogle(): Promise<AuthUser | null> {
     const fb = await getFirebase();
     if (!fb) return null;
-    const { GoogleAuthProvider, signInWithPopup } = await import("firebase/auth");
-    const cred = await signInWithPopup(fb.auth, new GoogleAuthProvider());
-    return toAuthUser(cred.user);
+    const { GoogleAuthProvider, signInWithPopup, signInWithRedirect } = await import("firebase/auth");
+    const provider = new GoogleAuthProvider();
+    try {
+      const cred = await signInWithPopup(fb.auth, provider);
+      return toAuthUser(cred.user);
+    } catch (err) {
+      const code = (err as { code?: string })?.code ?? "";
+      // The user deliberately closed/cancelled — don't force a redirect.
+      if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") {
+        return null;
+      }
+      // Popup blocked or broken (e.g. desktop COOP) → full-page redirect, no popup.
+      await signInWithRedirect(fb.auth, provider);
+      return null; // completes after the redirect via onAuthStateChanged
+    }
   }
 
   async signOut(): Promise<void> {
