@@ -51,13 +51,22 @@ export class AuthService {
   async signInWithGoogle(): Promise<AuthUser | null> {
     const fb = await getFirebase();
     if (!fb) return null;
-    // Full-page redirect rather than a popup: avoids desktop Chrome's COOP
-    // blocking the popup's window.close, and needs no extra OAuth redirect URI
-    // (the firebaseapp.com handler is authorised by default). Sign-in completes
-    // when the page returns — onAuthStateChanged / getRedirectResult pick it up.
-    const { GoogleAuthProvider, signInWithRedirect } = await import("firebase/auth");
-    await signInWithRedirect(fb.auth, new GoogleAuthProvider());
-    return null;
+    // With a same-origin authDomain (the Firebase Hosting domain) the popup is
+    // same-origin, so COOP no longer breaks it. Fall back to a full-page
+    // redirect if the popup is blocked.
+    const { GoogleAuthProvider, signInWithPopup, signInWithRedirect } = await import("firebase/auth");
+    const provider = new GoogleAuthProvider();
+    try {
+      const cred = await signInWithPopup(fb.auth, provider);
+      return toAuthUser(cred.user);
+    } catch (err) {
+      const code = (err as { code?: string })?.code ?? "";
+      if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") {
+        return null;
+      }
+      await signInWithRedirect(fb.auth, provider);
+      return null;
+    }
   }
 
   async signOut(): Promise<void> {
