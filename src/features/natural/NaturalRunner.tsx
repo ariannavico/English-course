@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { shuffle } from "@/utils/shuffle";
 import { Badge, Button, Card, Icon } from "@/components/ui";
 import { naturalService } from "@/services";
 import { naturalItems } from "@/data/natural";
@@ -23,6 +24,8 @@ export function NaturalRunner() {
   const item = queue[index];
   const isLast = index >= queue.length - 1;
   const bestId = item?.options.find((o) => o.best)?.id;
+  // Shuffle options so the natural version isn't always in the same spot (§44–45).
+  const opts = useMemo(() => shuffle(item.options), [item.id]);
 
   function pick(id: string) {
     if (chosen) return;
@@ -112,7 +115,7 @@ export function NaturalRunner() {
           <p className={styles.ask}>Which one would a native actually say?</p>
 
           <div className={styles.options} role="radiogroup" aria-label="Choose the natural version">
-            {item.options.map((o) => {
+            {opts.map((o) => {
               let cls = styles.option;
               if (chosen) {
                 if (o.best) cls += ` ${styles.optionBest}`;
@@ -129,7 +132,7 @@ export function NaturalRunner() {
           {chosen && (
             <>
               <div className={styles.reasonList}>
-                {item.options.map((o) => (
+                {opts.map((o) => (
                   <div key={o.id} className={`${styles.reason} ${o.best ? styles.reasonBest : ""}`}>
                     <span className={`${styles.reasonMark} ${o.best ? styles.markNat : ""}`}>
                       {o.best ? <Icon name="check" size={15} /> : "·"}

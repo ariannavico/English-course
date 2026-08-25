@@ -19,6 +19,7 @@ import {
 export const DEFAULT_SETTINGS: UserSettings = {
   theme: "system",
   showItalian: true,
+  hideTranslations: false,
   dailyGoal: 10,
   reducedMotion: false,
   b2Mode: false,

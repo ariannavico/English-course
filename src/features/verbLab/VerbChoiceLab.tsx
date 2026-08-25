@@ -20,6 +20,9 @@ export function VerbChoiceLab({ scenarios }: { scenarios: VerbChoiceScenario[] }
   const scenario = order[index];
   const isLast = index === order.length - 1;
   const bestVerb = scenario.options.find((o) => o.best)?.verb;
+  // Shuffle the options so the natural choice isn't always in the same spot —
+  // retrieval under uncertainty, not pattern-matching a position (spec §44–45).
+  const opts = useMemo(() => shuffle(scenario.options), [scenario.id]);
 
   function pick(verb: string) {
     if (chosen) return;
@@ -90,7 +93,7 @@ export function VerbChoiceLab({ scenarios }: { scenarios: VerbChoiceScenario[] }
           <p className={styles.question}>{scenario.question}</p>
 
           <div className={styles.verbs} role="radiogroup" aria-label="Choose a verb">
-            {scenario.options.map((o) => {
+            {opts.map((o) => {
               let cls = styles.verb;
               if (chosen) {
                 if (o.verb === bestVerb) cls += ` ${styles.verbBest}`;
@@ -107,7 +110,7 @@ export function VerbChoiceLab({ scenarios }: { scenarios: VerbChoiceScenario[] }
           {chosen && (
             <>
               <div className={styles.reasonList}>
-                {scenario.options.map((o) => (
+                {opts.map((o) => (
                   <div key={o.verb} className={`${styles.reason} ${o.best ? styles.reasonBest : ""}`}>
                     <span className={styles.reasonVerb}>
                       {o.best ? <Icon name="check" size={16} /> : null} {o.verb}

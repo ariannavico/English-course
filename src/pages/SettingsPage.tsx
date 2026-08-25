@@ -49,6 +49,22 @@ export function SettingsPage() {
             {settings.showItalian ? "On" : "Off"}
           </Button>
         </div>
+        <div className={styles.settingRow}>
+          <div>
+            <div style={{ fontWeight: 600 }}>No-translation mode</div>
+            <div className="subtle">
+              Hide Italian glosses by default, so you lean on English — the B2 way. (B2 Mode
+              hides them too.) On-demand hints still work.
+            </div>
+          </div>
+          <Button
+            size="sm"
+            variant={settings.hideTranslations ? "primary" : "default"}
+            onClick={() => updateSettings({ hideTranslations: !settings.hideTranslations })}
+          >
+            {settings.hideTranslations ? "On" : "Off"}
+          </Button>
+        </div>
       </Card>
 
       <Card title="Practice">
@@ -75,7 +91,7 @@ export function SettingsPage() {
             <div style={{ fontWeight: 600 }}>B2 Mode</div>
             <div className="subtle">
               Production first — daily practice prefers open-output exercises over
-              multiple-choice and translation.
+              multiple-choice and translation, and Italian glosses are hidden.
             </div>
           </div>
           <Button

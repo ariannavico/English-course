@@ -2,6 +2,8 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Badge, Button, Card, Icon } from "@/components/ui";
 import { collocationService } from "@/services";
+import { useProgress } from "@/hooks/useProgress";
+import { showItalianL1 } from "@/utils/prefs";
 import { collocationItems } from "@/data/collocations";
 import {
   firstLetterHint,
@@ -20,6 +22,7 @@ import styles from "./collocations.module.css";
  * family. The end screen shows which chunk type needs the most work.
  */
 export function CollocationRunner() {
+  const { settings } = useProgress();
   const queue = useMemo(() => sampleSession(collocationItems), []);
   const [index, setIndex] = useState(0);
   const [input, setInput] = useState("");
@@ -158,7 +161,9 @@ export function CollocationRunner() {
 
               <div className={styles.chunkCard}>
                 <div className={styles.chunkText}>{item.chunk}</div>
-                {item.gloss && <div className={styles.chunkGloss}>🇮🇹 {item.gloss}</div>}
+                {item.gloss && showItalianL1(settings) && (
+                  <div className={styles.chunkGloss}>🇮🇹 {item.gloss}</div>
+                )}
                 <div className={styles.family}>
                   <span className={styles.familyLabel}>Same pattern</span>
                   {item.family.map((f) => (

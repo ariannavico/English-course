@@ -2,6 +2,8 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Badge, Button, Card, Icon } from "@/components/ui";
 import { wordFamilyService } from "@/services";
+import { useProgress } from "@/hooks/useProgress";
+import { showItalianL1 } from "@/utils/prefs";
 import { wordFamilyItems } from "@/data/wordFamilies";
 import {
   firstLetterHint,
@@ -20,6 +22,7 @@ import styles from "./wordFamilies.module.css";
  * shows which form type (noun / verb / adjective / adverb) you produce least well.
  */
 export function WordFamilyRunner() {
+  const { settings } = useProgress();
   const queue = useMemo(() => sampleSession(wordFamilyItems), []);
   const [index, setIndex] = useState(0);
   const [input, setInput] = useState("");
@@ -171,7 +174,7 @@ export function WordFamilyRunner() {
                     );
                   })}
                 </div>
-                {item.gloss && <p className={styles.gloss}>🇮🇹 {item.gloss}</p>}
+                {item.gloss && showItalianL1(settings) && <p className={styles.gloss}>🇮🇹 {item.gloss}</p>}
               </div>
 
               <div className={styles.toolRow}>

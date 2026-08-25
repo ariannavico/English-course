@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { shuffle } from "@/utils/shuffle";
 import { Link } from "react-router-dom";
 import { Badge, Button, Card, Icon } from "@/components/ui";
 import { listeningService } from "@/services";
@@ -32,6 +33,8 @@ export function ListeningRunner() {
   const item = queue[index];
   const isLast = index >= queue.length - 1;
   const bestId = item?.options.find((o) => o.best)?.id;
+  // Shuffle options so the correct answer isn't always in the same spot (§44–45).
+  const opts = useMemo(() => shuffle(item.options), [item.id]);
   const meta = item ? LEVEL_META[item.level] : null;
 
   // Auto-play the line when a new item appears (if audio is available).
@@ -151,7 +154,7 @@ export function ListeningRunner() {
           <p className={styles.question}>{item.question}</p>
 
           <div className={styles.options} role="radiogroup" aria-label="Choose what you heard">
-            {item.options.map((o) => {
+            {opts.map((o) => {
               let cls = styles.option;
               if (chosen) {
                 if (o.best) cls += ` ${styles.optionBest}`;

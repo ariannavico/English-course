@@ -4,6 +4,7 @@ import { Badge, Button, Card, Icon } from "@/components/ui";
 import { paraphraseService } from "@/services";
 import { useSpeech } from "@/hooks/useSpeech";
 import { useProgress } from "@/hooks/useProgress";
+import { showItalianL1 } from "@/utils/prefs";
 import { sample } from "@/utils/shuffle";
 import { paraphraseItems } from "@/data/paraphrase";
 import { evaluateParaphrase, type ParaphraseSignals } from "./evaluate";
@@ -127,7 +128,7 @@ export function ParaphraseRunner() {
             Explain it in English <b>without using the word</b> (or its forms). Talk around it.
           </p>
 
-          {item.italian && (settings.showItalian || hint) ? (
+          {item.italian && (showItalianL1(settings) || hint) ? (
             <p className="subtle" style={{ textAlign: "center", margin: 0 }}>
               🇮🇹 {item.italian}
             </p>

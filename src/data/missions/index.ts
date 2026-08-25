@@ -4,6 +4,8 @@ import { restaurantProblem } from "./restaurant";
 import { jobInterview } from "./jobInterview";
 import { pharmacyVisit } from "./pharmacy";
 import { deliveryComplaint } from "./delivery";
+import { bankCard } from "./bankCard";
+import { productReturn } from "./productReturn";
 
 /** Registry of missions. Add a mission file and list it here — nothing else changes. */
 export const missions: Mission[] = [
@@ -12,6 +14,8 @@ export const missions: Mission[] = [
   jobInterview,
   pharmacyVisit,
   deliveryComplaint,
+  bankCard,
+  productReturn,
 ];
 
 const byId = new Map(missions.map((m) => [m.id, m]));

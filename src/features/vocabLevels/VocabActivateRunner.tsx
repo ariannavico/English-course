@@ -2,6 +2,8 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Badge, Button, Card, Icon } from "@/components/ui";
 import { vocabLevelsService } from "@/services";
+import { useProgress } from "@/hooks/useProgress";
+import { showItalianL1 } from "@/utils/prefs";
 import { matchesAnswer } from "@/utils/normalization";
 import { shuffle, sample } from "@/utils/shuffle";
 import { activeVocabItems } from "@/data/activeVocab";
@@ -32,6 +34,7 @@ function LevelDots({ level }: { level: VocabLevel }) {
  * screen shows the whole deck's ladder and how many words you activated.
  */
 export function VocabActivateRunner() {
+  const { settings } = useProgress();
   const startLevels = useMemo(
     () => Object.fromEntries(activeVocabItems.map((i) => [i.id, vocabLevelsService.levelOf(i.id)])) as Record<string, VocabLevel>,
     [],
@@ -204,9 +207,11 @@ export function VocabActivateRunner() {
             <>
               <p className={styles.hint}>Recall the word (no hints — you know this one):</p>
               <p className={styles.definition}>“{item.definition}”</p>
-              <p className="subtle" style={{ textAlign: "center", margin: 0 }}>
-                🇮🇹 {item.italian}
-              </p>
+              {showItalianL1(settings) && (
+                <p className="subtle" style={{ textAlign: "center", margin: 0 }}>
+                  🇮🇹 {item.italian}
+                </p>
+              )}
             </>
           )}
 
@@ -247,7 +252,7 @@ export function VocabActivateRunner() {
                 <Badge tone="primary">{item.pos}</Badge>
                 <p className={styles.revealDef}>{item.definition}</p>
                 <p className={styles.revealEx}>“{item.example}”</p>
-                <p className={styles.gloss}>🇮🇹 {item.italian}</p>
+                {showItalianL1(settings) && <p className={styles.gloss}>🇮🇹 {item.italian}</p>}
               </div>
 
               <div className={styles.toolRow}>

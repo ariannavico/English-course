@@ -3,6 +3,7 @@ import type { BriefStage } from "./types";
 import { Button, Icon } from "@/components/ui";
 import { useSpeech } from "@/hooks/useSpeech";
 import { useProgress } from "@/hooks/useProgress";
+import { showItalianL1 } from "@/utils/prefs";
 import styles from "./missions.module.css";
 
 /** Reads the situation / a line of dialogue, with an optional "listen" (TTS) button. */
@@ -22,10 +23,10 @@ export function BriefStageView({ stage, onAdvance }: { stage: BriefStage; onAdva
             <Icon name="repeat" size={16} /> Listen
           </Button>
         )}
-        {stage.italianHint && (settings.showItalian || showHint) && (
+        {stage.italianHint && (showItalianL1(settings) || showHint) && (
           <span className={styles.hint}>🇮🇹 {stage.italianHint}</span>
         )}
-        {stage.italianHint && !settings.showItalian && !showHint && (
+        {stage.italianHint && !showItalianL1(settings) && !showHint && (
           <Button size="sm" variant="ghost" onClick={() => setShowHint(true)}>
             Need a hint?
           </Button>

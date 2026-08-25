@@ -6,6 +6,8 @@ export interface UserSettings {
   theme: ThemePreference;
   /** Show Italian glosses alongside English by default. */
   showItalian: boolean;
+  /** No-translation mode (spec §46): hide Italian scaffolding by default. */
+  hideTranslations: boolean;
   /** Number of exercises in a daily practice session. */
   dailyGoal: number;
   /** Reduce animation / motion. */

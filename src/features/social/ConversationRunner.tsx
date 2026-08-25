@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { shuffle } from "@/utils/shuffle";
 import { Badge, Button, Card, Icon } from "@/components/ui";
 import { socialService } from "@/services";
 import { socialItems } from "@/data/social";
@@ -23,6 +24,8 @@ export function ConversationRunner() {
   const item = queue[index];
   const isLast = index >= queue.length - 1;
   const bestId = item?.options.find((o) => o.best)?.id;
+  // Shuffle options so the natural reply isn't always in the same spot (§44–45).
+  const opts = useMemo(() => shuffle(item.options), [item.id]);
 
   function pick(id: string) {
     if (chosen) return;
@@ -115,7 +118,7 @@ export function ConversationRunner() {
           <p className={styles.prompt}>{item.prompt}</p>
 
           <div className={styles.options} role="radiogroup" aria-label="Choose a reply">
-            {item.options.map((o) => {
+            {opts.map((o) => {
               let cls = styles.option;
               if (chosen) {
                 if (o.best) cls += ` ${styles.optionBest}`;
@@ -132,7 +135,7 @@ export function ConversationRunner() {
           {chosen && (
             <>
               <div className={styles.reasonList}>
-                {item.options.map((o) => (
+                {opts.map((o) => (
                   <div key={o.id} className={`${styles.reason} ${o.best ? styles.reasonBest : ""}`}>
                     <span className={styles.reasonMark}>{o.best ? <Icon name="check" size={15} /> : "·"}</span>
                     <span>{o.feedback}</span>
