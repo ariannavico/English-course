@@ -30,6 +30,7 @@ export const navItems: NavItem[] = [
 
   // Speaking & interaction.
   { to: "/fluency", label: "Fluency", icon: "flame", group: "Speaking" },
+  { to: "/shadowing", label: "Say It Back", icon: "repeat" },
   { to: "/argumentation", label: "Build Your Case", icon: "layers" },
   { to: "/social", label: "Keep It Going", icon: "target" },
 
@@ -51,7 +52,7 @@ export const navItems: NavItem[] = [
 
   // Reference content.
   { to: "/verbs", label: "Verbs", icon: "book", group: "Explore" },
-  { to: "/phrasal-verbs", label: "Phrasal Verbs", icon: "layers" },
+  { to: "/phrasal-az", label: "Phrasal Verbs", icon: "layers" },
   { to: "/vocabulary", label: "Vocabulary", icon: "list" },
   { to: "/irregular-verbs", label: "Irregular Verbs", icon: "layers" },
   { to: "/chapters", label: "Chapters", icon: "book" },

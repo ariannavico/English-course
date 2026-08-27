@@ -71,7 +71,7 @@ export class SearchService {
         type: "phrasal-verb",
         title: pv.phrase,
         subtitle: `Phrasal verb · ${pv.meanings[0]?.italian ?? ""}`,
-        href: `/phrasal-verbs?focus=${pv.id}`,
+        href: `/phrasal-az?q=${encodeURIComponent(pv.phrase)}`,
         haystack: normalize(
           [pv.phrase, pv.baseVerb, pv.particle, ...pv.meanings.map((m) => m.italian)].join(" "),
         ),

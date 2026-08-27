@@ -37,6 +37,7 @@ export const STORAGE_KEYS = {
   wordFamilies: "wordFamilies",
   vocabLevels: "vocabLevels",
   projects: "projects",
+  shadowing: "shadowing",
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];

@@ -47,6 +47,10 @@ export const router = createBrowserRouter([
         lazy: () => import("@/pages/SocialPage").then((m) => ({ Component: m.SocialPage })),
       },
       {
+        path: "shadowing",
+        lazy: () => import("@/pages/ShadowingPage").then((m) => ({ Component: m.ShadowingPage })),
+      },
+      {
         path: "register",
         lazy: () => import("@/pages/RegisterPage").then((m) => ({ Component: m.RegisterPage })),
       },
@@ -149,8 +153,9 @@ export const router = createBrowserRouter([
         lazy: () => import("@/pages/VerbDetailPage").then((m) => ({ Component: m.VerbDetailPage })),
       },
       {
-        path: "phrasal-verbs",
-        lazy: () => import("@/pages/PhrasalVerbPage").then((m) => ({ Component: m.PhrasalVerbPage })),
+        path: "phrasal-az",
+        lazy: () =>
+          import("@/pages/PhrasalCompletePage").then((m) => ({ Component: m.PhrasalCompletePage })),
       },
       {
         path: "vocabulary",

@@ -16,7 +16,7 @@ const CTA: Record<string, { to: string; label: string }> = {
   grammar: { to: "/weaknesses", label: "Fix weak grammar" },
   verb: { to: "/verb-lab", label: "Verb Choice Lab" },
   vocab: { to: "/vocabulary", label: "Vocabulary" },
-  phrasal: { to: "/phrasal-verbs", label: "Phrasal verbs" },
+  phrasal: { to: "/phrasal-az", label: "Phrasal verbs" },
   speaking: { to: "/missions", label: "Do a mission" },
   fluency: { to: "/fluency", label: "Fluency Mode" },
   paraphrase: { to: "/paraphrase", label: "Get around the word" },
