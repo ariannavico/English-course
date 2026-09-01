@@ -9,3 +9,5 @@ export * from "./chapter";
 export * from "./progress";
 export * from "./spacedRepetition";
 export * from "./user";
+export * from "./unit";
+export * from "./review";

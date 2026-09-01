@@ -38,6 +38,9 @@ export const STORAGE_KEYS = {
   vocabLevels: "vocabLevels",
   projects: "projects",
   shadowing: "shadowing",
+  // Second-release unified model (feat/second-release, Phase 1).
+  units: "units",
+  reviewItems: "reviewItems",
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];

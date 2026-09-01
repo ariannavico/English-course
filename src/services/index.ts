@@ -26,6 +26,8 @@ import { VocabLevelsService } from "./vocabLevels/VocabLevelsService";
 import { ProjectService } from "./projects/ProjectService";
 import { ShadowingService } from "./shadowing/ShadowingService";
 import { StoryService } from "./story/StoryService";
+import { UnitService } from "./units/UnitService";
+import { ReviewService } from "./review/ReviewService";
 import { AssessmentService } from "./assessment/AssessmentService";
 import { evaluationService } from "./evaluation/EvaluationService";
 import { speechService } from "./speech/SpeechService";
@@ -53,6 +55,10 @@ export const vocabLevelsService = new VocabLevelsService(storage);
 export const projectService = new ProjectService(storage);
 export const shadowingService = new ShadowingService(storage);
 export const storyService = new StoryService(storage);
+// Second-release unified model (feat/second-release, Phase 1). Instantiated so
+// call sites exist; not yet wired into any UI, so runtime behaviour is unchanged.
+export const unitService = new UnitService(storage);
+export const reviewService = new ReviewService(storage);
 export const assessmentService = new AssessmentService(storage);
 
 /** exerciseId -> tags, for weakness detection. Built once from the content registry. */
