@@ -32,8 +32,8 @@ describe("grammar lessons", () => {
     }
   });
 
-  it("the ENTIRE A1 and A2 levels are authored", () => {
-    for (const level of ["A1", "A2"] as const) {
+  it("the ENTIRE A1, A2 and B1 levels are authored", () => {
+    for (const level of ["A1", "A2", "B1"] as const) {
       const units = unitsBySection("grammar").filter((u) => u.level === level);
       expect(units.length).toBeGreaterThan(15);
       for (const u of units) {
