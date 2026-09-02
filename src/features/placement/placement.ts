@@ -53,6 +53,28 @@ export function buildRoutingPlan(band: PlacementLevel): RoutingPlan {
   return { band, ...PLANS[band] };
 }
 
+/**
+ * How far DOWN the CEFR ladder a placement credits as "already known" (user
+ * requirement #3). Returns the highest LEVELS index (A1=0 … C2=5) to mark as
+ * completed-by-assessment — strictly the levels below where the learner placed,
+ * kept deliberately conservative. Example: placing at B1 credits A1 & A2, i.e.
+ * index 1 (=A2), matching the brief. These units stay visible and reopenable.
+ */
+export function assessmentCreditIndex(band: PlacementLevel): number {
+  switch (band) {
+    case "A2":
+      return 0; // A1
+    case "A2+":
+      return 1; // A1–A2
+    case "B1":
+      return 1; // A1–A2
+    case "B1+":
+      return 2; // A1–B1
+    case "B2":
+      return 2; // A1–B1
+  }
+}
+
 const PLANS: Record<PlacementLevel, Omit<RoutingPlan, "band">> = {
   A2: {
     headline: "Let's build a solid base.",

@@ -21,6 +21,14 @@ export interface NavItem {
 export const navItems: NavItem[] = [
   { to: "/", label: "Home", icon: "home", mobile: true },
 
+  // Second-release hub (feat/second-release). The dashboard links to all 8
+  // content sections via /s/:section; new sections get their own entry here.
+  { to: "/dashboard", label: "Dashboard", icon: "monitor", group: "Study" },
+  { to: "/review-hub", label: "Ripasso", icon: "repeat" },
+  { to: "/s/connectors", label: "Connectors", icon: "layers" },
+  { to: "/s/adjectives", label: "Adjectives", icon: "list" },
+  { to: "/s/adverbs", label: "Adverbs", icon: "list" },
+
   // The daily loop.
   { to: "/missions", label: "Missions", icon: "target", group: "Practice", mobile: true },
   { to: "/practice", label: "Quick Practice", icon: "grid", mobile: true },

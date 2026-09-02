@@ -1,0 +1,134 @@
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.7rem;
+}
+.tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 1rem 1.1rem;
+  text-decoration: none;
+  color: var(--text);
+}
+.tileLink:hover {
+  border-color: var(--primary);
+}
+.tileVal {
+  font-size: 2rem;
+  font-weight: 750;
+  line-height: 1;
+}
+.of {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.tileLbl {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+.resume {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.7rem;
+  background: var(--primary-soft);
+  border-radius: var(--r-md);
+  padding: 0.7rem 1rem;
+}
+.resumeLbl {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--primary);
+  font-weight: 700;
+}
+.resumeLink {
+  font-weight: 600;
+  color: var(--text);
+}
+.h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0.6rem 0 0;
+}
+.sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 0.6rem;
+}
+@media (min-width: 640px) {
+  .sections { grid-template-columns: 1fr 1fr; }
+}
+.section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 0.85rem 1rem;
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.section:hover {
+  border-color: var(--primary);
+}
+.sectionTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.sectionName {
+  font-weight: 600;
+}
+.sectionPct {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.bar {
+  height: 7px;
+  background: var(--surface-2);
+  border-radius: var(--r-full);
+  overflow: hidden;
+}
+.barFill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: var(--r-full);
+}
+.sectionMeta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.assessed {
+  color: var(--text-subtle);
+}
+.levels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.level {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.levelName {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  width: 2.2rem;
+}
+.level .bar {
+  flex: 1;
+}
+.levelPct {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  width: 3rem;
+  text-align: right;
+}

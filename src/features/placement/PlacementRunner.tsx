@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Badge, Button, Card } from "@/components/ui";
 import { ExerciseRenderer } from "@/components/exercises/ExerciseRenderer";
-import { placementService } from "@/services";
+import { placementService, unitService } from "@/services";
 import { placementItems } from "@/data/placement";
-import { buildRoutingPlan, computePlacement } from "./placement";
+import { catalog } from "@/data/catalog";
+import { LEVELS } from "@/types";
+import { assessmentCreditIndex, buildRoutingPlan, computePlacement } from "./placement";
 import type { PlacementAnswer, PlacementResult } from "./types";
 import styles from "./placement.module.css";
 
@@ -18,6 +20,7 @@ export function PlacementRunner() {
   const [answers, setAnswers] = useState<PlacementAnswer[]>([]);
   const [pending, setPending] = useState<PlacementAnswer | null>(null);
   const [result, setResult] = useState<PlacementResult | null>(null);
+  const [credit, setCredit] = useState<{ count: number; throughLevel: string } | null>(null);
 
   const item = placementItems[index];
   const isLast = index >= placementItems.length - 1;
@@ -30,6 +33,11 @@ export function PlacementRunner() {
     if (isLast) {
       const res = computePlacement(next);
       placementService.save(res.band, res.correct, res.total);
+      // Requirement #3: credit the levels below where they placed as
+      // completed-by-assessment (non-destructive, reopenable).
+      const idx = assessmentCreditIndex(res.band);
+      const count = unitService.completeByAssessmentUpTo(catalog, idx);
+      setCredit({ count, throughLevel: LEVELS[idx] });
       setResult(res);
     } else {
       setIndex((i) => i + 1);
@@ -41,9 +49,10 @@ export function PlacementRunner() {
     setAnswers([]);
     setPending(null);
     setResult(null);
+    setCredit(null);
   }
 
-  if (result) return <PlacementResultView result={result} onRetake={restart} />;
+  if (result) return <PlacementResultView result={result} credit={credit} onRetake={restart} />;
 
   const pct = Math.round((index / placementItems.length) * 100);
 
@@ -82,7 +91,15 @@ export function PlacementRunner() {
   );
 }
 
-function PlacementResultView({ result, onRetake }: { result: PlacementResult; onRetake: () => void }) {
+function PlacementResultView({
+  result,
+  credit,
+  onRetake,
+}: {
+  result: PlacementResult;
+  credit: { count: number; throughLevel: string } | null;
+  onRetake: () => void;
+}) {
   const plan = buildRoutingPlan(result.band);
   return (
     <div className={styles.wrap}>
@@ -95,6 +112,20 @@ function PlacementResultView({ result, onRetake }: { result: PlacementResult; on
           </p>
         </div>
       </Card>
+
+      {credit && credit.count > 0 && (
+        <Card>
+          <div className="stack" style={{ gap: "0.5rem" }}>
+            <Badge tone="success">Pre-completati {credit.count} contenuti</Badge>
+            <p className="subtle" style={{ margin: 0 }}>
+              Ho segnato come <strong>già visti (da assessment)</strong> i contenuti fino al livello{" "}
+              <strong>{credit.throughLevel}</strong>. Restano tutti visibili nella dashboard: puoi
+              ripassarli o studiarli davvero quando vuoi — sono distinti da quelli che completi studiando.
+            </p>
+            <Link to="/dashboard">Vedi la dashboard →</Link>
+          </div>
+        </Card>
+      )}
 
       <Card title="How far you got">
         <div className={styles.tiers}>

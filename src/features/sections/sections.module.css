@@ -1,0 +1,76 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.groupTitle {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin: 0;
+  font-weight: 700;
+}
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.card {
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  overflow: hidden;
+}
+.head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  text-align: left;
+}
+.head:hover {
+  background: var(--surface-2);
+}
+.title {
+  font-weight: 600;
+  font-size: 1.02rem;
+}
+.chev {
+  margin-left: auto;
+  color: var(--text-muted);
+  transition: transform 0.15s ease;
+}
+.chevOpen {
+  transform: rotate(180deg);
+}
+.body {
+  padding: 0.4rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.pending {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}

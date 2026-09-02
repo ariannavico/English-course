@@ -67,6 +67,19 @@ export const router = createBrowserRouter([
         lazy: () => import("@/pages/NaturalPage").then((m) => ({ Component: m.NaturalPage })),
       },
       {
+        path: "dashboard",
+        lazy: () =>
+          import("@/pages/LearningDashboardPage").then((m) => ({ Component: m.LearningDashboardPage })),
+      },
+      {
+        path: "s/:section",
+        lazy: () => import("@/pages/SectionPage").then((m) => ({ Component: m.SectionPage })),
+      },
+      {
+        path: "review-hub",
+        lazy: () => import("@/pages/ReviewHubPage").then((m) => ({ Component: m.ReviewHubPage })),
+      },
+      {
         path: "listening",
         lazy: () => import("@/pages/ListeningPage").then((m) => ({ Component: m.ListeningPage })),
       },

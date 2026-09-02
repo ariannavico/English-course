@@ -215,19 +215,24 @@ export class ReviewService {
   }
 
   /**
-   * One-time seed of the store from the legacy SM-2 data. Only runs when the
-   * store is empty, so it never clobbers real review history. Returns how many
-   * items were imported (0 if it was already populated).
+   * Seed the store from the legacy SM-2 data, ADDITIVELY: only legacy items whose
+   * id isn't already tracked are imported, so it never clobbers real review
+   * history and is safe to call on every mount. Returns how many were added.
    */
   migrateFromLegacyStore(at: Date = new Date()): number {
-    const existing = this.load();
-    if (Object.keys(existing).length > 0) return 0;
+    const store = this.load();
     const legacy =
       this.storage.get<Record<string, SpacedRepetitionItem>>(STORAGE_KEYS.spacedRepetition) ?? {};
     const seeded = migrateFromLegacy(legacy, at);
-    const count = Object.keys(seeded).length;
-    if (count > 0) this.save(seeded);
-    return count;
+    let added = 0;
+    for (const [id, item] of Object.entries(seeded)) {
+      if (!store[id]) {
+        store[id] = item;
+        added++;
+      }
+    }
+    if (added > 0) this.save(store);
+    return added;
   }
 }
 
