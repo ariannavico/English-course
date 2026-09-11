@@ -32,13 +32,9 @@ describe("grammar lessons", () => {
     }
   });
 
-  it("the ENTIRE A1, A2 and B1 levels are authored", () => {
-    for (const level of ["A1", "A2", "B1"] as const) {
-      const units = unitsBySection("grammar").filter((u) => u.level === level);
-      expect(units.length).toBeGreaterThan(15);
-      for (const u of units) {
-        expect(getGrammarLesson(u.id), `missing ${level} lesson ${u.id}`).toBeDefined();
-      }
+  it("EVERY grammar chapter A1→C2 is authored", () => {
+    for (const u of unitsBySection("grammar")) {
+      expect(getGrammarLesson(u.id), `missing lesson ${u.id} (${u.level})`).toBeDefined();
     }
   });
 

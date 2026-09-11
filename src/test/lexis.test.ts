@@ -38,7 +38,7 @@ describe("lexical content", () => {
     expect(lexItemsForUnit("adj-personality").every((i) => getLexItem(i.id))).toBe(true);
     expect(lexItemsForUnit("adv-frequency").length).toBeGreaterThan(3);
     expect(lexItemsForUnit("voc-food").length).toBeGreaterThan(3);
-    expect(lexItemsForUnit("voc-politics")).toEqual([]); // not authored yet
+    expect(lexItemsForUnit("vb-movement")).toEqual([]); // Verbs section not authored yet
   });
 
   it("adverb ReviewItems resolve on both tracks", () => {
