@@ -13,9 +13,12 @@ const STATUS_LABEL: Record<UnitStatus, string> = {
   completed: "Completato",
 };
 
-/** Generic word-list section (Vocabulary / Adjectives / Adverbs / Verbs). One
- * engine for all of them (proposal §11.2); words feed the unified Review. */
-export function LexRunner({ section }: { section: SectionKind }) {
+/**
+ * Word-list section (Vocabulary / Adjectives / Adverbs / Verbs). One engine for
+ * all. In `readOnly` mode (Explore/consult) it shows only the words, without
+ * status tracking or review controls.
+ */
+export function LexRunner({ section, readOnly = false }: { section: SectionKind; readOnly?: boolean }) {
   const groups = unitsByCategory(section);
   const kind: ReviewKind = SECTION_REVIEW_KIND[section] ?? "word";
   const [, setV] = useState(0);
@@ -28,7 +31,7 @@ export function LexRunner({ section }: { section: SectionKind }) {
           {category !== "—" && <h2 className={styles.groupTitle}>{category}</h2>}
           <div className={styles.cards}>
             {units.map((u) => (
-              <UnitCard key={u.id} unit={u} kind={kind} onChange={refresh} />
+              <UnitCard key={u.id} unit={u} kind={kind} onChange={refresh} readOnly={readOnly} />
             ))}
           </div>
         </section>
@@ -37,7 +40,17 @@ export function LexRunner({ section }: { section: SectionKind }) {
   );
 }
 
-function UnitCard({ unit, kind, onChange }: { unit: Unit; kind: ReviewKind; onChange: () => void }) {
+function UnitCard({
+  unit,
+  kind,
+  onChange,
+  readOnly,
+}: {
+  unit: Unit;
+  kind: ReviewKind;
+  onChange: () => void;
+  readOnly: boolean;
+}) {
   const [open, setOpen] = useState(false);
   const items = lexItemsForUnit(unit.id);
   const progress = unitService.get(unit.id);
@@ -48,7 +61,7 @@ function UnitCard({ unit, kind, onChange }: { unit: Unit; kind: ReviewKind; onCh
   function toggle() {
     const next = !open;
     setOpen(next);
-    if (next && status === "not_started") {
+    if (next && !readOnly && status === "not_started") {
       unitService.start(unit);
       onChange();
     }
@@ -72,10 +85,12 @@ function UnitCard({ unit, kind, onChange }: { unit: Unit; kind: ReviewKind; onCh
         <span className={styles.title}>{unit.title}</span>
         {items.length > 0 && <span className={styles.count}>{items.length}</span>}
         <Badge tone="neutral">{unit.level}</Badge>
-        <Badge tone={tone}>
-          {STATUS_LABEL[status]}
-          {status === "completed" && progress?.completedBy === "assessment" ? " · assessment" : ""}
-        </Badge>
+        {!readOnly && (
+          <Badge tone={tone}>
+            {STATUS_LABEL[status]}
+            {status === "completed" && progress?.completedBy === "assessment" ? " · assessment" : ""}
+          </Badge>
+        )}
         <Icon name="chevron" size={18} className={`${styles.chev} ${open ? styles.chevOpen : ""}`} />
       </button>
 
@@ -83,7 +98,7 @@ function UnitCard({ unit, kind, onChange }: { unit: Unit; kind: ReviewKind; onCh
         <div className={styles.body}>
           {items.length === 0 ? (
             <p className={styles.pending}>
-              <Icon name="book" size={15} /> Parole in arrivo. Puoi comunque segnare lo stato.
+              <Icon name="book" size={15} /> Parole in arrivo.
             </p>
           ) : (
             <div className={styles.list}>
@@ -100,22 +115,30 @@ function UnitCard({ unit, kind, onChange }: { unit: Unit; kind: ReviewKind; onCh
             </div>
           )}
 
-          <div className={styles.actions}>
-            {items.length > 0 && (
-              <Button size="sm" variant={inReview ? "ghost" : "primary"} onClick={addToReview} disabled={inReview}>
-                <Icon name="repeat" size={16} /> {inReview ? "Nel ripasso ✓" : `Aggiungi al ripasso (${items.length})`}
-              </Button>
-            )}
-            {status === "completed" ? (
-              <Button size="sm" variant="ghost" onClick={reopen} style={{ marginLeft: "auto" }}>
-                Ripassa di nuovo
-              </Button>
-            ) : (
-              <Button size="sm" variant="primary" onClick={complete} style={{ marginLeft: "auto" }}>
-                <Icon name="check" size={16} /> Segna come completato
-              </Button>
-            )}
-          </div>
+          {!readOnly && (
+            <div className={styles.actions}>
+              {items.length > 0 && (
+                <Button
+                  size="sm"
+                  variant={inReview ? "ghost" : "primary"}
+                  onClick={addToReview}
+                  disabled={inReview}
+                >
+                  <Icon name="repeat" size={16} />{" "}
+                  {inReview ? "Nel ripasso ✓" : `Aggiungi al ripasso (${items.length})`}
+                </Button>
+              )}
+              {status === "completed" ? (
+                <Button size="sm" variant="ghost" onClick={reopen} style={{ marginLeft: "auto" }}>
+                  Ripassa di nuovo
+                </Button>
+              ) : (
+                <Button size="sm" variant="primary" onClick={complete} style={{ marginLeft: "auto" }}>
+                  <Icon name="check" size={16} /> Segna come completato
+                </Button>
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>

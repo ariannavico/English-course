@@ -1,71 +1,18 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { AppShell } from "@/components/layout/AppShell";
 
 /**
- * Pages are code-split with React Router's route-level `lazy`: each page module
- * is its own JS chunk, fetched only when the route is visited. The router
- * resolves the module before rendering the route (no synchronous Suspense),
- * while the eager AppShell (frame + providers) stays on screen throughout.
- * Named exports are mapped to the route's `Component`.
+ * Two surfaces on the same content sections:
+ *  - Dashboard (/dashboard): progress per section + study & verify (/s/:section).
+ *  - Explore (/explore): consult each section's content (/explore/:section).
+ * Pages are code-split with route-level `lazy`.
  */
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <AppShell />,
     children: [
-      {
-        index: true,
-        lazy: () => import("@/pages/HomePage").then((m) => ({ Component: m.HomePage })),
-      },
-      {
-        path: "missions",
-        lazy: () => import("@/pages/MissionsPage").then((m) => ({ Component: m.MissionsPage })),
-      },
-      {
-        path: "missions/:missionId",
-        lazy: () => import("@/pages/MissionPage").then((m) => ({ Component: m.MissionPage })),
-      },
-      {
-        path: "progress",
-        lazy: () => import("@/pages/ProgressPage").then((m) => ({ Component: m.ProgressPage })),
-      },
-      {
-        path: "fluency",
-        lazy: () => import("@/pages/FluencyPage").then((m) => ({ Component: m.FluencyPage })),
-      },
-      {
-        path: "paraphrase",
-        lazy: () => import("@/pages/ParaphrasePage").then((m) => ({ Component: m.ParaphrasePage })),
-      },
-      {
-        path: "argumentation",
-        lazy: () =>
-          import("@/pages/ArgumentationPage").then((m) => ({ Component: m.ArgumentationPage })),
-      },
-      {
-        path: "social",
-        lazy: () => import("@/pages/SocialPage").then((m) => ({ Component: m.SocialPage })),
-      },
-      {
-        path: "shadowing",
-        lazy: () => import("@/pages/ShadowingPage").then((m) => ({ Component: m.ShadowingPage })),
-      },
-      {
-        path: "register",
-        lazy: () => import("@/pages/RegisterPage").then((m) => ({ Component: m.RegisterPage })),
-      },
-      {
-        path: "writing",
-        lazy: () => import("@/pages/WritingPage").then((m) => ({ Component: m.WritingPage })),
-      },
-      {
-        path: "collocations",
-        lazy: () => import("@/pages/CollocationsPage").then((m) => ({ Component: m.CollocationsPage })),
-      },
-      {
-        path: "natural",
-        lazy: () => import("@/pages/NaturalPage").then((m) => ({ Component: m.NaturalPage })),
-      },
+      { index: true, element: <Navigate to="/dashboard" replace /> },
       {
         path: "dashboard",
         lazy: () =>
@@ -76,120 +23,17 @@ export const router = createBrowserRouter([
         lazy: () => import("@/pages/SectionPage").then((m) => ({ Component: m.SectionPage })),
       },
       {
-        path: "review-hub",
-        lazy: () => import("@/pages/ReviewHubPage").then((m) => ({ Component: m.ReviewHubPage })),
+        path: "explore",
+        lazy: () => import("@/pages/ExplorePage").then((m) => ({ Component: m.ExplorePage })),
       },
       {
-        path: "listening",
-        lazy: () => import("@/pages/ListeningPage").then((m) => ({ Component: m.ListeningPage })),
-      },
-      {
-        path: "real-talk",
-        lazy: () => import("@/pages/DialoguesPage").then((m) => ({ Component: m.DialoguesPage })),
-      },
-      {
-        path: "word-families",
-        lazy: () => import("@/pages/WordFamiliesPage").then((m) => ({ Component: m.WordFamiliesPage })),
-      },
-      {
-        path: "activate-vocab",
-        lazy: () => import("@/pages/ActiveVocabPage").then((m) => ({ Component: m.ActiveVocabPage })),
-      },
-      {
-        path: "projects",
-        lazy: () => import("@/pages/ProjectsPage").then((m) => ({ Component: m.ProjectsPage })),
-      },
-      {
-        path: "projects/:projectId",
-        lazy: () => import("@/pages/ProjectPage").then((m) => ({ Component: m.ProjectPage })),
-      },
-      {
-        path: "story",
-        lazy: () => import("@/pages/StoryPage").then((m) => ({ Component: m.StoryPage })),
-      },
-      {
-        path: "story/:episodeId",
-        lazy: () => import("@/pages/StoryEpisodePage").then((m) => ({ Component: m.StoryEpisodePage })),
-      },
-      {
-        path: "placement",
-        lazy: () => import("@/pages/PlacementPage").then((m) => ({ Component: m.PlacementPage })),
-      },
-      {
-        path: "assessment",
-        lazy: () => import("@/pages/AssessmentPage").then((m) => ({ Component: m.AssessmentPage })),
-      },
-      {
-        path: "verb-lab",
-        lazy: () => import("@/pages/VerbLabPage").then((m) => ({ Component: m.VerbLabPage })),
-      },
-      {
-        path: "verb-lab/:verbId",
-        lazy: () => import("@/pages/VerbUniversePage").then((m) => ({ Component: m.VerbUniversePage })),
-      },
-      {
-        path: "weaknesses",
-        lazy: () => import("@/pages/WeaknessesPage").then((m) => ({ Component: m.WeaknessesPage })),
-      },
-      {
-        path: "micro-lessons",
-        lazy: () => import("@/pages/MicroLessonsPage").then((m) => ({ Component: m.MicroLessonsPage })),
-      },
-      {
-        path: "micro-lessons/:lessonId",
-        lazy: () => import("@/pages/MicroLessonPage").then((m) => ({ Component: m.MicroLessonPage })),
-      },
-      {
-        path: "chapters",
-        lazy: () => import("@/pages/ChaptersPage").then((m) => ({ Component: m.ChaptersPage })),
-      },
-      {
-        path: "chapters/:chapterId",
-        lazy: () => import("@/pages/ChapterPage").then((m) => ({ Component: m.ChapterPage })),
-      },
-      {
-        path: "practice",
+        path: "explore/:section",
         lazy: () =>
-          import("@/pages/DailyPracticePage").then((m) => ({ Component: m.DailyPracticePage })),
-      },
-      {
-        path: "review",
-        lazy: () => import("@/pages/ReviewPage").then((m) => ({ Component: m.ReviewPage })),
-      },
-      {
-        path: "verbs",
-        lazy: () =>
-          import("@/pages/VerbExplorerPage").then((m) => ({ Component: m.VerbExplorerPage })),
+          import("@/pages/ExploreSectionPage").then((m) => ({ Component: m.ExploreSectionPage })),
       },
       {
         path: "verbs/:verbId",
         lazy: () => import("@/pages/VerbDetailPage").then((m) => ({ Component: m.VerbDetailPage })),
-      },
-      {
-        path: "phrasal-az",
-        lazy: () =>
-          import("@/pages/PhrasalCompletePage").then((m) => ({ Component: m.PhrasalCompletePage })),
-      },
-      {
-        path: "vocabulary",
-        lazy: () => import("@/pages/VocabularyPage").then((m) => ({ Component: m.VocabularyPage })),
-      },
-      {
-        path: "irregular-verbs",
-        lazy: () =>
-          import("@/pages/IrregularVerbsPage").then((m) => ({ Component: m.IrregularVerbsPage })),
-      },
-      {
-        path: "mistakes",
-        lazy: () => import("@/pages/MistakesPage").then((m) => ({ Component: m.MistakesPage })),
-      },
-      {
-        path: "exam",
-        lazy: () => import("@/pages/FinalExamPage").then((m) => ({ Component: m.FinalExamPage })),
-      },
-      {
-        path: "settings",
-        lazy: () => import("@/pages/SettingsPage").then((m) => ({ Component: m.SettingsPage })),
       },
       {
         path: "*",

@@ -13,9 +13,12 @@ const STATUS_LABEL: Record<UnitStatus, string> = {
   completed: "Completato",
 };
 
-/** Grammar section (feat/second-release, Phase 2): chapters by level, each with
- * explanation → rules → examples → common mistakes → mini-test. */
-export function GrammarRunner() {
+/**
+ * Grammar section: chapters by level, each with explanation → rules → examples →
+ * common mistakes → mini-test. In `readOnly` mode (Explore/consult) it shows the
+ * lesson content only, without status tracking, mini-test or review.
+ */
+export function GrammarRunner({ readOnly = false }: { readOnly?: boolean }) {
   const groups = unitsByCategory("grammar");
   const [, setV] = useState(0);
   const refresh = () => setV((v) => v + 1);
@@ -27,7 +30,7 @@ export function GrammarRunner() {
           <h2 className={styles.groupTitle}>{category}</h2>
           <div className={styles.cards}>
             {units.map((u) => (
-              <ChapterCard key={u.id} unit={u} onChange={refresh} />
+              <ChapterCard key={u.id} unit={u} onChange={refresh} readOnly={readOnly} />
             ))}
           </div>
         </section>
@@ -36,7 +39,7 @@ export function GrammarRunner() {
   );
 }
 
-function ChapterCard({ unit, onChange }: { unit: Unit; onChange: () => void }) {
+function ChapterCard({ unit, onChange, readOnly }: { unit: Unit; onChange: () => void; readOnly: boolean }) {
   const [open, setOpen] = useState(false);
   const lesson = getGrammarLesson(unit.id);
   const progress = unitService.get(unit.id);
@@ -46,7 +49,7 @@ function ChapterCard({ unit, onChange }: { unit: Unit; onChange: () => void }) {
   function toggle() {
     const next = !open;
     setOpen(next);
-    if (next && status === "not_started") {
+    if (next && !readOnly && status === "not_started") {
       unitService.start(unit);
       onChange();
     }
@@ -66,32 +69,29 @@ function ChapterCard({ unit, onChange }: { unit: Unit; onChange: () => void }) {
       <button className={styles.head} aria-expanded={open} onClick={toggle}>
         <span className={styles.title}>{unit.title}</span>
         <Badge tone="neutral">{unit.level}</Badge>
-        <Badge tone={tone}>
-          {STATUS_LABEL[status]}
-          {status === "completed" && progress?.completedBy === "assessment" ? " · assessment" : ""}
-        </Badge>
+        {!readOnly && (
+          <Badge tone={tone}>
+            {STATUS_LABEL[status]}
+            {status === "completed" && progress?.completedBy === "assessment" ? " · assessment" : ""}
+          </Badge>
+        )}
         <Icon name="chevron" size={18} className={`${styles.chev} ${open ? styles.chevOpen : ""}`} />
       </button>
 
       {open &&
         (lesson ? (
-          <Lesson lesson={lesson} status={status} onComplete={complete} onReopen={reopen} />
+          <Lesson
+            lesson={lesson}
+            status={status}
+            onComplete={complete}
+            onReopen={reopen}
+            readOnly={readOnly}
+          />
         ) : (
           <div className={styles.body}>
             <p className={styles.pending}>
-              <Icon name="book" size={15} /> Lezione in arrivo. Puoi comunque segnare lo stato.
+              <Icon name="book" size={15} /> Lezione in arrivo.
             </p>
-            <div className={styles.actions}>
-              {status === "completed" ? (
-                <Button size="sm" variant="ghost" onClick={reopen}>
-                  Ripassa di nuovo
-                </Button>
-              ) : (
-                <Button size="sm" variant="primary" onClick={complete}>
-                  <Icon name="check" size={16} /> Segna come completato
-                </Button>
-              )}
-            </div>
           </div>
         ))}
     </div>
@@ -103,11 +103,13 @@ function Lesson({
   status,
   onComplete,
   onReopen,
+  readOnly,
 }: {
   lesson: GrammarLesson;
   status: UnitStatus;
   onComplete: () => void;
   onReopen: () => void;
+  readOnly: boolean;
 }) {
   return (
     <div className={styles.body}>
@@ -141,8 +143,17 @@ function Lesson({
         ))}
       </div>
 
-      <h3 className={styles.h3}>Mini-test</h3>
-      <MiniTest questions={lesson.miniTest} status={status} onComplete={onComplete} onReopen={onReopen} />
+      {!readOnly && (
+        <>
+          <h3 className={styles.h3}>Mini-test</h3>
+          <MiniTest
+            questions={lesson.miniTest}
+            status={status}
+            onComplete={onComplete}
+            onReopen={onReopen}
+          />
+        </>
+      )}
     </div>
   );
 }

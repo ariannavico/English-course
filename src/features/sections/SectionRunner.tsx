@@ -23,10 +23,10 @@ const STATUS_LABEL: Record<UnitStatus, string> = {
  * delegate to their bespoke runner; the rest show status controls now and fill
  * their lesson/word content in later steps.
  */
-export function SectionRunner({ section }: { section: SectionKind }) {
-  if (section === "connectors") return <ConnectorsRunner />;
-  if (section === "grammar") return <GrammarRunner />;
-  if (LEXICAL.includes(section)) return <LexRunner section={section} />;
+export function SectionRunner({ section, readOnly = false }: { section: SectionKind; readOnly?: boolean }) {
+  if (section === "connectors") return <ConnectorsRunner readOnly={readOnly} />;
+  if (section === "grammar") return <GrammarRunner readOnly={readOnly} />;
+  if (LEXICAL.includes(section)) return <LexRunner section={section} readOnly={readOnly} />;
   return <GenericSection section={section} />;
 }
 

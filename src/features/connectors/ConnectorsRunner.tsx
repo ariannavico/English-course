@@ -14,7 +14,7 @@ const STATUS_LABEL: Record<UnitStatus, string> = {
 
 /** Connectors by function — the first Second-Release vertical slice: catalog
  * Units drive the page, status is UnitService, review entries are ReviewService. */
-export function ConnectorsRunner() {
+export function ConnectorsRunner({ readOnly = false }: { readOnly?: boolean }) {
   const groups = useMemo(() => unitsByCategory("connectors"), []);
   // A version counter to re-read the services after a mutation.
   const [, setV] = useState(0);
@@ -27,7 +27,7 @@ export function ConnectorsRunner() {
           <h2 className={styles.groupTitle}>{category}</h2>
           <div className={styles.cards}>
             {units.map((unit) => (
-              <FunctionCard key={unit.id} unit={unit} onChange={refresh} />
+              <FunctionCard key={unit.id} unit={unit} onChange={refresh} readOnly={readOnly} />
             ))}
           </div>
         </section>
@@ -36,7 +36,7 @@ export function ConnectorsRunner() {
   );
 }
 
-function FunctionCard({ unit, onChange }: { unit: Unit; onChange: () => void }) {
+function FunctionCard({ unit, onChange, readOnly }: { unit: Unit; onChange: () => void; readOnly: boolean }) {
   const content = getConnectorFunction(unit.id);
   const [open, setOpen] = useState(false);
   const progress = unitService.get(unit.id);
@@ -49,7 +49,7 @@ function FunctionCard({ unit, onChange }: { unit: Unit; onChange: () => void }) 
   function toggle() {
     const next = !open;
     setOpen(next);
-    if (next && status === "not_started") {
+    if (next && !readOnly && status === "not_started") {
       unitService.start(unit);
       onChange();
     }
@@ -76,10 +76,12 @@ function FunctionCard({ unit, onChange }: { unit: Unit; onChange: () => void }) 
       <button className={styles.head} aria-expanded={open} onClick={toggle}>
         <span className={styles.fn}>{content?.fn ?? unit.title}</span>
         <Badge tone="neutral">{unit.level}</Badge>
-        <Badge tone={tone}>
-          {STATUS_LABEL[status]}
-          {status === "completed" && progress?.completedBy === "assessment" ? " · assessment" : ""}
-        </Badge>
+        {!readOnly && (
+          <Badge tone={tone}>
+            {STATUS_LABEL[status]}
+            {status === "completed" && progress?.completedBy === "assessment" ? " · assessment" : ""}
+          </Badge>
+        )}
         <Icon name="chevron" size={18} className={`${styles.chev} ${open ? styles.chevOpen : ""}`} />
       </button>
 
@@ -104,20 +106,22 @@ function FunctionCard({ unit, onChange }: { unit: Unit; onChange: () => void }) 
             ))}
           </div>
 
-          <div className={styles.actions}>
-            <Button size="sm" variant={inReview ? "ghost" : "primary"} onClick={addToReview} disabled={inReview}>
-              <Icon name="repeat" size={16} /> {inReview ? "Nel ripasso ✓" : `Aggiungi al ripasso (${content.connectors.length})`}
-            </Button>
-            {status === "completed" ? (
-              <Button size="sm" variant="ghost" onClick={reopen}>
-                Ripassa di nuovo
+          {!readOnly && (
+            <div className={styles.actions}>
+              <Button size="sm" variant={inReview ? "ghost" : "primary"} onClick={addToReview} disabled={inReview}>
+                <Icon name="repeat" size={16} /> {inReview ? "Nel ripasso ✓" : `Aggiungi al ripasso (${content.connectors.length})`}
               </Button>
-            ) : (
-              <Button size="sm" variant="primary" onClick={complete} style={{ marginLeft: "auto" }}>
-                <Icon name="check" size={16} /> Segna come completato
-              </Button>
-            )}
-          </div>
+              {status === "completed" ? (
+                <Button size="sm" variant="ghost" onClick={reopen}>
+                  Ripassa di nuovo
+                </Button>
+              ) : (
+                <Button size="sm" variant="primary" onClick={complete} style={{ marginLeft: "auto" }}>
+                  <Icon name="check" size={16} /> Segna come completato
+                </Button>
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>

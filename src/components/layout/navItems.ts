@@ -11,69 +11,11 @@ export interface NavItem {
 }
 
 /**
- * Single source of truth for navigation, shared by sidebar and mobile bar
- * (spec §49). As the B2 environment grew to ~20 trainers, a single "Practice"
- * list became unusable, so the practice modules are grouped by SKILL —
- * Speaking / Words & verbs / Listening / Writing — under a task-first order:
- * the daily loop (Practice) first, skills next, then Explore, Content, Progress
- * and Assess. The mobile bar keeps only the five everyday actions.
+ * Single source of truth for navigation. The app has two surfaces on the same
+ * content sections: the Dashboard (progress + study & verify) and Explore
+ * (consult the content). Everything else was removed in the cleanup.
  */
 export const navItems: NavItem[] = [
-  { to: "/", label: "Home", icon: "home", mobile: true },
-
-  // Second-release hub (feat/second-release). The dashboard links to all 8
-  // content sections via /s/:section; new sections get their own entry here.
-  { to: "/dashboard", label: "Dashboard", icon: "monitor", group: "Study" },
-  { to: "/review-hub", label: "Ripasso", icon: "repeat" },
-  { to: "/s/connectors", label: "Connectors", icon: "layers" },
-  { to: "/s/adjectives", label: "Adjectives", icon: "list" },
-  { to: "/s/adverbs", label: "Adverbs", icon: "list" },
-
-  // The daily loop.
-  { to: "/missions", label: "Missions", icon: "target", group: "Practice", mobile: true },
-  { to: "/practice", label: "Quick Practice", icon: "grid", mobile: true },
-  { to: "/review", label: "Review", icon: "repeat", mobile: true },
-  { to: "/projects", label: "Projects", icon: "grid" },
-  { to: "/story", label: "Story Mode", icon: "book" },
-
-  // Speaking & interaction.
-  { to: "/fluency", label: "Fluency", icon: "flame", group: "Speaking" },
-  { to: "/shadowing", label: "Say It Back", icon: "repeat" },
-  { to: "/argumentation", label: "Build Your Case", icon: "layers" },
-  { to: "/social", label: "Keep It Going", icon: "target" },
-
-  // Words & verbs.
-  { to: "/verb-lab", label: "Verb Lab", icon: "grid", group: "Words & verbs" },
-  { to: "/collocations", label: "Speak in Chunks", icon: "layers" },
-  { to: "/paraphrase", label: "Paraphrase", icon: "repeat" },
-  { to: "/natural", label: "Sound Natural", icon: "flame" },
-  { to: "/word-families", label: "Word Families", icon: "layers" },
-  { to: "/activate-vocab", label: "Activate Vocab", icon: "list" },
-
-  // Listening.
-  { to: "/listening", label: "Train Your Ear", icon: "monitor", group: "Listening" },
-  { to: "/real-talk", label: "Real Talk", icon: "list" },
-
-  // Writing & register.
-  { to: "/writing", label: "Writing Studio", icon: "list", group: "Writing" },
-  { to: "/register", label: "Register Lab", icon: "layers" },
-
-  // Reference content.
-  { to: "/verbs", label: "Verbs", icon: "book", group: "Explore" },
-  { to: "/phrasal-az", label: "Phrasal Verbs", icon: "layers" },
-  { to: "/vocabulary", label: "Vocabulary", icon: "list" },
-  { to: "/irregular-verbs", label: "Irregular Verbs", icon: "layers" },
-  { to: "/chapters", label: "Chapters", icon: "book" },
-
-  // Progress & diagnosis.
-  { to: "/progress", label: "My Progress", icon: "monitor", group: "Progress", mobile: true },
-  { to: "/weaknesses", label: "Weaknesses", icon: "target" },
-  { to: "/micro-lessons", label: "Micro-lessons", icon: "check" },
-  { to: "/mistakes", label: "My Mistakes", icon: "alert" },
-
-  // Placement & assessment.
-  { to: "/placement", label: "Find Your Level", icon: "target", group: "Assess" },
-  { to: "/assessment", label: "B2 Assessment", icon: "check" },
-
-  { to: "/settings", label: "Settings", icon: "settings" },
+  { to: "/dashboard", label: "Dashboard", icon: "monitor", mobile: true },
+  { to: "/explore", label: "Explore", icon: "book", mobile: true },
 ];
