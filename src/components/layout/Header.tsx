@@ -1,6 +1,5 @@
 import { Icon } from "@/components/ui";
 import { useTheme } from "@/hooks/useTheme";
-import { GlobalSearch } from "./GlobalSearch";
 import { AccountMenu } from "./AccountMenu";
 import styles from "./layout.module.css";
 
@@ -18,7 +17,7 @@ export function Header({ onToggleMenu }: { onToggleMenu: () => void }) {
       >
         <Icon name="menu" size={22} />
       </button>
-      <GlobalSearch />
+      <div style={{ flex: 1 }} />
       <div className={styles.headerActions}>
         <button
           onClick={cycle}

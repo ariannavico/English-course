@@ -1,1 +1,0 @@
-export { socialItems } from "./items";

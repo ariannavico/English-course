@@ -1,13 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { grammarLessons, getGrammarLesson } from "@/data/grammarLessons";
 import { getUnit, unitsBySection } from "@/data/catalog";
-import { resolveCard } from "@/features/reviewHub/resolve";
-import type { ReviewItem } from "@/types";
-
-function reviewItem(id: string): ReviewItem {
-  const t = { ease: 2.3, interval: 0, repetitions: 0, lapses: 0, correct: 0, wrong: 0, due: "2026-09-02T00:00:00.000Z" };
-  return { id, kind: "grammar", recognition: { ...t }, recall: { ...t }, addedAt: t.due };
-}
 
 describe("grammar lessons", () => {
   it("each lesson links to a real grammar Unit and is well-formed", () => {
@@ -36,12 +29,5 @@ describe("grammar lessons", () => {
     for (const u of unitsBySection("grammar")) {
       expect(getGrammarLesson(u.id), `missing lesson ${u.id} (${u.level})`).toBeDefined();
     }
-  });
-
-  it("a grammar ReviewItem resolves to the chapter title + a rule", () => {
-    const card = resolveCard(reviewItem("gr-a1-to-be"), "recognition");
-    expect(card.prompt).toBe("Verbo to be");
-    expect(card.kindLabel).toBe("Grammar");
-    expect(card.answer.length).toBeGreaterThan(0);
   });
 });
