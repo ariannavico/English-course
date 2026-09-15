@@ -1,5 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { lexItems, getLexItem, lexItemsForUnit, adjectiveItems, adverbItems } from "@/data/lexis";
+import {
+  lexItems,
+  getLexItem,
+  lexItemsForUnit,
+  adjectiveItems,
+  adverbItems,
+  verbItems,
+  phrasalItems,
+  irregularItems,
+} from "@/data/lexis";
 import { getUnit } from "@/data/catalog";
 
 describe("lexical content", () => {
@@ -26,11 +35,24 @@ describe("lexical content", () => {
     }
   });
 
+  it("verb / phrasal / irregular items link to the right section", () => {
+    const check = (items: typeof lexItems, section: string) => {
+      expect(items.length).toBeGreaterThan(0);
+      for (const i of items) expect(getUnit(i.unitId)?.section, i.id).toBe(section);
+    };
+    check(verbItems, "verbs");
+    check(phrasalItems, "phrasal");
+    check(irregularItems, "irregular");
+  });
+
   it("authored units resolve their words; unauthored ones are empty", () => {
     expect(lexItemsForUnit("adj-personality").length).toBeGreaterThan(3);
     expect(lexItemsForUnit("adj-personality").every((i) => getLexItem(i.id))).toBe(true);
     expect(lexItemsForUnit("adv-frequency").length).toBeGreaterThan(3);
     expect(lexItemsForUnit("voc-food").length).toBeGreaterThan(3);
-    expect(lexItemsForUnit("vb-movement")).toEqual([]); // Verbs section not authored yet
+    expect(lexItemsForUnit("vb-movement").length).toBeGreaterThan(3); // Verbs now authored
+    expect(lexItemsForUnit("phr-common").length).toBeGreaterThan(3);
+    expect(lexItemsForUnit("irr-full-change").length).toBeGreaterThan(3);
+    expect(lexItemsForUnit("does-not-exist")).toEqual([]);
   });
 });

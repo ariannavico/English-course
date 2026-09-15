@@ -26,4 +26,6 @@ export const SECTION_REVIEW_KIND: Partial<Record<SectionKind, ReviewKind>> = {
   adjectives: "adjective",
   adverbs: "adverb",
   verbs: "verb",
+  phrasal: "phrasal",
+  irregular: "verb",
 };

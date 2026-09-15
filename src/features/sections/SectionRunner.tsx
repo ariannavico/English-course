@@ -8,7 +8,14 @@ import { LexRunner } from "@/features/lexis/LexRunner";
 import { GrammarRunner } from "@/features/grammarLessons/GrammarRunner";
 import styles from "./sections.module.css";
 
-const LEXICAL: SectionKind[] = ["vocabulary", "adjectives", "adverbs", "verbs"];
+const LEXICAL: SectionKind[] = [
+  "vocabulary",
+  "adjectives",
+  "adverbs",
+  "verbs",
+  "phrasal",
+  "irregular",
+];
 
 const STATUS_LABEL: Record<UnitStatus, string> = {
   not_started: "Da iniziare",

@@ -14,6 +14,9 @@ const STUDY_READY = new Set<SectionKind>([
   "adjectives",
   "adverbs",
   "connectors",
+  "verbs",
+  "phrasal",
+  "irregular",
 ]);
 
 const linkFor = (section: SectionKind) =>
