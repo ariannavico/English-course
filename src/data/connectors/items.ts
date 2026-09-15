@@ -53,6 +53,8 @@ export const connectorFunctions: ConnectorFunction[] = [
       e("as-cause", "as", "siccome, poiché", "Congiunzione + frase.", "As it was raining, we stayed in.", "Causa; «as» ha anche altri usi (come/mentre)."),
       e("due-to", "due to", "a causa di", "Preposizione + nome.", "The delay was due to fog.", "Di solito dopo il verbo «be»; + nome, non frase."),
       e("owing-to", "owing to", "a causa di", "Preposizione + nome.", "Owing to strikes, trains were cancelled.", "Più formale di «due to»."),
+      e("because-of", "because of", "a causa di", "Preposizione + nome (mai una frase).", "We stayed in because of the storm.", "+ nome: no «because of it was raining» (quello è «because»)."),
+      e("thanks-to", "thanks to", "grazie a", "Preposizione + nome.", "Thanks to your help, we finished early.", "Causa con esito positivo."),
     ],
   },
   {
@@ -65,6 +67,8 @@ export const connectorFunctions: ConnectorFunction[] = [
       e("as-a-result", "as a result", "di conseguenza", "Espressione a inizio frase.", "Costs rose. As a result, prices went up."),
       e("consequently", "consequently", "di conseguenza", "Avverbio; frase separata.", "He missed the deadline; consequently, he lost the contract.", "Formale."),
       e("thus", "thus", "così, in tal modo", "Avverbio; registro molto formale.", "Demand fell; thus, output was cut.", "Accademico/formale."),
+      e("hence", "hence", "quindi, da qui", "Avverbio; molto formale, spesso + nome.", "The data were unreliable; hence the caution.", "Formale; può reggere direttamente un nome."),
+      e("for-this-reason", "for this reason", "per questo motivo", "Espressione a inizio frase.", "The road is unsafe. For this reason, it was closed."),
     ],
   },
   {
@@ -78,6 +82,8 @@ export const connectorFunctions: ConnectorFunction[] = [
       e("besides", "besides", "inoltre, del resto", "Avverbio; aggiunge un motivo, più informale.", "I'm tired. Besides, it's late.", "Spesso introduce l'argomento decisivo."),
       e("as-well-as", "as well as", "oltre a", "Preposizione + nome o -ing.", "She speaks French as well as English.", "+ nome/-ing, non una frase; diverso da «as well» a fine frase."),
       e("also", "also", "anche", "Avverbio; in mezzo alla frase.", "He also plays the piano.", "Posizione: dopo l'ausiliare / prima del verbo pieno."),
+      e("whats-more", "what's more", "per di più", "Espressione a inizio frase (informale).", "It's cheap. What's more, it's easy to use."),
+      e("not-only", "not only … but also", "non solo … ma anche", "Struttura correlativa; inversione se a inizio frase.", "Not only did he apologise, but he also paid.", "A inizio frase serve l'inversione: «Not only did he…»."),
     ],
   },
   {
@@ -114,6 +120,8 @@ export const connectorFunctions: ConnectorFunction[] = [
       e("likewise", "likewise", "allo stesso modo, ugualmente", "Avverbio.", "He apologised, and she did likewise."),
       e("in-the-same-way", "in the same way", "allo stesso modo", "Espressione.", "In the same way, plants need light to grow."),
       e("just-as", "just as", "proprio come", "Congiunzione + frase.", "Just as bees need flowers, flowers need bees."),
+      e("compared-to", "compared to/with", "rispetto a", "Preposizione + nome.", "Compared to last year, sales are up."),
+      e("in-comparison", "in comparison", "in confronto", "Espressione a inizio frase.", "The first plan was weak. In comparison, this one is solid."),
     ],
   },
   {
@@ -125,6 +133,8 @@ export const connectorFunctions: ConnectorFunction[] = [
       e("in-order-to", "in order to", "allo scopo di, per", "in order to + infinito (formale).", "She left early in order to catch the train.", "Più formale di «to»."),
       e("so-as-to", "so as to", "così da, per", "so as to + infinito.", "He tiptoed so as to not wake the baby.", "Negativo: «so as not to»."),
       e("so-that", "so that", "affinché, così che", "so that + frase (spesso con can/would).", "I'll write it down so that you remember.", "+ frase, non infinito; diverso da «so as to»."),
+      e("for-purpose", "for (+ -ing / noun)", "per", "for + -ing (funzione) o + nome.", "This tool is for cutting metal.", "Lo scopo di un oggetto: «for + -ing», non «to»."),
+      e("with-the-aim-of", "with the aim of", "con l'obiettivo di", "with the aim of + -ing (formale).", "They met with the aim of reaching a deal.", "Formale; + -ing."),
     ],
   },
   {
@@ -137,6 +147,8 @@ export const connectorFunctions: ConnectorFunction[] = [
       e("overall", "overall", "nel complesso", "Avverbio a inizio frase.", "Overall, it was a good year."),
       e("all-in-all", "all in all", "tutto sommato", "Espressione.", "All in all, we were satisfied."),
       e("in-short", "in short", "in breve", "Espressione.", "In short, it works."),
+      e("to-conclude", "to conclude", "per concludere", "Espressione a inizio frase (finale).", "To conclude, the benefits outweigh the costs."),
+      e("in-summary", "in summary", "in sintesi", "Espressione a inizio frase.", "In summary, the trial was a success."),
     ],
   },
 ];

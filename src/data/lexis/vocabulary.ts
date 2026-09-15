@@ -432,4 +432,42 @@ export const vocabularyItems: LexItem[] = [
   v("voc-idiomatic", "the last straw", "la goccia che fa traboccare il vaso", "That was the last straw.", "idiom"),
   v("voc-idiomatic", "call it a day", "chiudere per oggi", "Let's call it a day.", "idiom"),
   v("voc-idiomatic", "get cold feet", "farsi prendere dalla paura", "He got cold feet before the wedding.", "idiom"),
+
+  /* ---- expansion (2026-09-15): new themes ---- */
+  // Sport (A2)
+  v("voc-sport", "team", "squadra", "Our team won the final."),
+  v("voc-sport", "match", "partita", "The match kicks off at three."),
+  v("voc-sport", "score", "punteggio", "The final score was 2–1."),
+  v("voc-sport", "goal", "gol/porta", "He scored the winning goal."),
+  v("voc-sport", "referee", "arbitro", "The referee blew the whistle."),
+  v("voc-sport", "coach", "allenatore", "The coach changed the tactics."),
+  v("voc-sport", "tournament", "torneo", "She reached the tournament final."),
+  v("voc-sport", "champion", "campione", "He's the reigning champion."),
+  v("voc-sport", "defeat", "sconfitta", "It was a painful defeat."),
+  v("voc-sport", "stadium", "stadio", "The stadium holds 60,000 people."),
+
+  // Art & literature (B1)
+  v("voc-art", "artwork", "opera d'arte", "The gallery bought a new artwork."),
+  v("voc-art", "sculpture", "scultura", "The park is full of sculptures."),
+  v("voc-art", "gallery", "galleria/museo", "We spent the afternoon at the gallery."),
+  v("voc-art", "exhibition", "mostra", "The exhibition runs until May."),
+  v("voc-art", "artist", "artista", "She's a self-taught artist."),
+  v("voc-art", "canvas", "tela", "He painted straight onto the canvas."),
+  v("voc-art", "masterpiece", "capolavoro", "The novel is considered a masterpiece."),
+  v("voc-art", "novel", "romanzo", "Her first novel was a bestseller."),
+  v("voc-art", "poetry", "poesia", "He writes poetry in his spare time."),
+  v("voc-art", "portrait", "ritratto", "The portrait hangs above the fireplace."),
+
+  // Crime & law (B2)
+  v("voc-crime-law", "offence", "reato", "Drink-driving is a serious offence."),
+  v("voc-crime-law", "criminal", "criminale", "The criminal was caught on camera."),
+  v("voc-crime-law", "theft", "furto", "He was charged with theft."),
+  v("voc-crime-law", "robbery", "rapina", "There was a bank robbery downtown."),
+  v("voc-crime-law", "suspect", "sospettato", "Police have arrested a suspect."),
+  v("voc-crime-law", "witness", "testimone", "A witness described the attacker."),
+  v("voc-crime-law", "trial", "processo", "The trial lasted three weeks."),
+  v("voc-crime-law", "jury", "giuria", "The jury reached a verdict."),
+  v("voc-crime-law", "verdict", "verdetto", "The verdict was not guilty."),
+  v("voc-crime-law", "proof", "prova", "There was no proof of his guilt."),
+  v("voc-crime-law", "guilty", "colpevole", "He pleaded guilty to the charge.", "adj"),
 ];

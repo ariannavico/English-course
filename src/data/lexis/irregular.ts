@@ -80,4 +80,71 @@ export const irregularItems: LexItem[] = [
   i("irr-advanced", "weave", "weave – wove – woven", "tessere/intrecciare", "The story is finely woven."),
   i("irr-advanced", "strive", "strive – strove – striven", "sforzarsi", "They have striven for years."),
   i("irr-advanced", "forbid", "forbid – forbade – forbidden", "vietare", "Smoking is strictly forbidden."),
+
+  /* ---- expansion (2026-09-15) ---- */
+
+  // irr-same-form (no change)
+  i("irr-same-form", "burst", "burst – burst – burst", "scoppiare", "The pipe burst in the night."),
+  i("irr-same-form", "spread", "spread – spread – spread", "diffondere/spargere", "The news spread quickly."),
+  i("irr-same-form", "split", "split – split – split", "dividere/spaccare", "We split the bill three ways."),
+  i("irr-same-form", "quit", "quit – quit – quit", "smettere/lasciare", "She quit her job last month."),
+  i("irr-same-form", "bet", "bet – bet – bet", "scommettere", "I bet you can't do it."),
+  i("irr-same-form", "cast", "cast – cast – cast", "gettare/lanciare", "He cast the net into the sea."),
+
+  // irr-full-change
+  i("irr-full-change", "know", "know – knew – known", "sapere/conoscere", "I've known her for years."),
+  i("irr-full-change", "grow", "grow – grew – grown", "crescere/coltivare", "The city has grown fast."),
+  i("irr-full-change", "throw", "throw – threw – thrown", "lanciare", "He has thrown the ball too far."),
+  i("irr-full-change", "draw", "draw – drew – drawn", "disegnare/tirare", "She has drawn a map for us."),
+  i("irr-full-change", "blow", "blow – blew – blown", "soffiare", "The wind has blown the door shut."),
+  i("irr-full-change", "show", "show – showed – shown", "mostrare", "He has shown me the photos."),
+  i("irr-full-change", "fall", "fall – fell – fallen", "cadere", "Prices have fallen again."),
+  i("irr-full-change", "sell", "sell – sold – sold", "vendere", "They've sold their house."),
+  i("irr-full-change", "tell", "tell – told – told", "dire/raccontare", "She told me the truth."),
+  i("irr-full-change", "hold", "hold – held – held", "tenere", "He has held the record for years."),
+
+  // irr-vowel-change
+  i("irr-vowel-change", "sink", "sink – sank – sunk", "affondare", "The boat has sunk."),
+  i("irr-vowel-change", "shrink", "shrink – shrank – shrunk", "restringersi", "My shirt has shrunk in the wash."),
+  i("irr-vowel-change", "spring", "spring – sprang – sprung", "balzare", "The cat sprang onto the shelf."),
+  i("irr-vowel-change", "swing", "swing – swung – swung", "dondolare", "The gate swung open."),
+  i("irr-vowel-change", "sting", "sting – stung – stung", "pungere", "A bee stung me on the arm."),
+  i("irr-vowel-change", "win", "win – won – won", "vincere", "They have won the cup twice."),
+  i("irr-vowel-change", "dig", "dig – dug – dug", "scavare", "The dog has dug a hole."),
+  i("irr-vowel-change", "hang", "hang – hung – hung", "appendere", "She hung the picture on the wall."),
+  i("irr-vowel-change", "stick", "stick – stuck – stuck", "attaccare/bloccarsi", "The door has stuck again."),
+  i("irr-vowel-change", "strike", "strike – struck – struck", "colpire", "Lightning struck the tower."),
+
+  // irr-t-ending
+  i("irr-t-ending", "sweep", "sweep – swept – swept", "spazzare", "He swept the floor."),
+  i("irr-t-ending", "creep", "creep – crept – crept", "strisciare/avanzare furtivo", "She crept out of the room."),
+  i("irr-t-ending", "weep", "weep – wept – wept", "piangere", "He wept at the news."),
+  i("irr-t-ending", "deal", "deal – dealt – dealt", "trattare/distribuire", "We've dealt with worse."),
+  i("irr-t-ending", "spend", "spend – spent – spent", "spendere/trascorrere", "I've spent all my savings."),
+  i("irr-t-ending", "send", "send – sent – sent", "inviare", "She has sent the invitations."),
+  i("irr-t-ending", "bend", "bend – bent – bent", "piegare", "He bent the wire in half."),
+  i("irr-t-ending", "lend", "lend – lent – lent", "prestare", "I lent him my car."),
+
+  // irr-en-participle
+  i("irr-en-participle", "freeze", "freeze – froze – frozen", "congelare", "The lake has frozen over."),
+  i("irr-en-participle", "beat", "beat – beat – beaten", "battere", "They have beaten the record."),
+  i("irr-en-participle", "forgive", "forgive – forgave – forgiven", "perdonare", "She has forgiven him."),
+  i("irr-en-participle", "wear", "wear – wore – worn", "indossare", "He has worn that coat for years."),
+  i("irr-en-participle", "get", "get – got – gotten", "ottenere", "Prices have gotten higher."),
+  i("irr-en-participle", "mistake", "mistake – mistook – mistaken", "scambiare/sbagliare", "I mistook her for her sister."),
+  i("irr-en-participle", "ride", "ride – rode – ridden", "cavalcare/andare (in bici)", "She has ridden horses since childhood."),
+  i("irr-en-participle", "hide", "hide – hid – hidden", "nascondere", "He has hidden the keys."),
+  i("irr-en-participle", "bite", "bite – bit – bitten", "mordere", "The dog has bitten the postman."),
+
+  // irr-advanced (rare)
+  i("irr-advanced", "grind", "grind – ground – ground", "macinare", "The coffee is freshly ground."),
+  i("irr-advanced", "bind", "bind – bound – bound", "legare", "The book is bound in leather."),
+  i("irr-advanced", "cling", "cling – clung – clung", "aggrapparsi", "The child clung to her mother."),
+  i("irr-advanced", "fling", "fling – flung – flung", "scagliare", "He flung the door open."),
+  i("irr-advanced", "dwell", "dwell – dwelt – dwelt", "dimorare/soffermarsi", "Don't dwell on the past."),
+  i("irr-advanced", "undergo", "undergo – underwent – undergone", "subire/sottoporsi a", "He underwent surgery last year."),
+  i("irr-advanced", "withdraw", "withdraw – withdrew – withdrawn", "ritirare", "She withdrew her application."),
+  i("irr-advanced", "overcome", "overcome – overcame – overcome", "superare", "They overcame every obstacle."),
+  i("irr-advanced", "forsake", "forsake – forsook – forsaken", "abbandonare", "He felt forsaken by everyone."),
+  i("irr-advanced", "sow", "sow – sowed – sown", "seminare", "The seeds were sown in spring."),
 ];

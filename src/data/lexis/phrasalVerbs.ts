@@ -62,4 +62,29 @@ export const phrasalItems: LexItem[] = [
   p("phr-advanced", "brush up on", "rispolverare", "I need to brush up on my French."),
   p("phr-advanced", "wear off", "svanire (effetto)", "The painkiller soon wore off."),
   p("phr-advanced", "phase out", "eliminare gradualmente", "They're phasing out old models."),
+
+  /* ---- expansion (2026-09-15) ---- */
+  // phr-essentials
+  p("phr-essentials", "get in", "salire (auto)/entrare", "Get in, I'll give you a lift."),
+  p("phr-essentials", "get off", "scendere (mezzi)", "We get off at the next stop."),
+  p("phr-essentials", "stand up", "alzarsi in piedi", "Everyone stood up to clap."),
+  p("phr-essentials", "throw away", "buttare via", "Don't throw away those papers."),
+
+  // phr-common
+  p("phr-common", "fill in", "compilare", "Fill in the form in capitals."),
+  p("phr-common", "give back", "restituire", "Can you give back my pen?"),
+  p("phr-common", "hand in", "consegnare", "Hand in your essays by Friday."),
+  p("phr-common", "put off", "rimandare", "They put off the meeting till Monday."),
+
+  // phr-idiomatic
+  p("phr-idiomatic", "get over", "superare (una cosa)", "It took her months to get over it."),
+  p("phr-idiomatic", "run into", "imbattersi in", "I ran into an old friend today."),
+  p("phr-idiomatic", "take up", "iniziare (hobby)/occupare", "He's taken up cycling."),
+  p("phr-idiomatic", "call off", "annullare", "They called off the wedding."),
+
+  // phr-advanced
+  p("phr-advanced", "fall through", "andare a monte", "The deal fell through at the last minute."),
+  p("phr-advanced", "iron out", "appianare", "We need to iron out a few details."),
+  p("phr-advanced", "stem from", "derivare da", "The problem stems from poor planning."),
+  p("phr-advanced", "rule out", "escludere", "We can't rule out an error."),
 ];
