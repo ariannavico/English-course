@@ -3,16 +3,13 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { SectionRunner } from "@/features/sections/SectionRunner";
 import { SECTIONS } from "@/data/catalog";
 import type { SectionKind } from "@/types";
-import { VerbExplorerPage } from "./VerbExplorerPage";
-import { PhrasalCompletePage } from "./PhrasalCompletePage";
-import { IrregularVerbsPage } from "./IrregularVerbsPage";
 
 const VALID = new Set(SECTIONS.map((s) => s.kind));
 
 /**
- * Consult view for one section (Explore). The five content sections render their
- * material read-only via SectionRunner; verbs/phrasal/irregular reuse their rich
- * existing reference pages.
+ * Consult view for one section (Explore). Every section renders its own content
+ * read-only via SectionRunner — the same material you study on the Dashboard, so
+ * the two surfaces stay in sync.
  */
 export function ExploreSectionPage() {
   const { section } = useParams<{ section: string }>();
@@ -26,10 +23,6 @@ export function ExploreSectionPage() {
       </div>
     );
   }
-
-  if (section === "verbs") return <VerbExplorerPage />;
-  if (section === "phrasal") return <PhrasalCompletePage />;
-  if (section === "irregular") return <IrregularVerbsPage />;
 
   return (
     <div className="stack">
