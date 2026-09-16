@@ -4,6 +4,7 @@ import { adverbItems } from "./adverbs";
 import { vocabularyItems } from "./vocabulary";
 import { verbItems } from "./verbs";
 import { phrasalItems } from "./phrasalVerbs";
+import { phrasalReferenceItems } from "./phrasalReference";
 import { irregularItems } from "./irregular";
 
 /** All authored lexical content across sections. */
@@ -13,6 +14,7 @@ export const lexItems: LexItem[] = [
   ...vocabularyItems,
   ...verbItems,
   ...phrasalItems,
+  ...phrasalReferenceItems,
   ...irregularItems,
 ];
 
@@ -33,4 +35,12 @@ export function lexItemsForUnit(unitId: string): LexItem[] {
   return byUnit.get(unitId) ?? [];
 }
 
-export { adjectiveItems, adverbItems, vocabularyItems, verbItems, phrasalItems, irregularItems };
+export {
+  adjectiveItems,
+  adverbItems,
+  vocabularyItems,
+  verbItems,
+  phrasalItems,
+  phrasalReferenceItems,
+  irregularItems,
+};

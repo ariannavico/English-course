@@ -147,4 +147,9 @@ export const irregularItems: LexItem[] = [
   i("irr-advanced", "overcome", "overcome – overcame – overcome", "superare", "They overcame every obstacle."),
   i("irr-advanced", "forsake", "forsake – forsook – forsaken", "abbandonare", "He felt forsaken by everyone."),
   i("irr-advanced", "sow", "sow – sowed – sown", "seminare", "The seeds were sown in spring."),
+
+  /* ---- merge from the old Irregular reference (2026-09-15) ---- */
+  i("irr-full-change", "have", "have – had – had", "avere", "She has had a cold all week."),
+  i("irr-full-change", "make", "make – made – made", "fare/creare", "He has made a decision."),
+  i("irr-full-change", "find", "find – found – found", "trovare", "I found my keys at last."),
 ];

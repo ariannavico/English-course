@@ -7,6 +7,7 @@ import {
   adverbItems,
   verbItems,
   phrasalItems,
+  phrasalReferenceItems,
   irregularItems,
 } from "@/data/lexis";
 import { getUnit } from "@/data/catalog";
@@ -42,6 +43,7 @@ describe("lexical content", () => {
     };
     check(verbItems, "verbs");
     check(phrasalItems, "phrasal");
+    check(phrasalReferenceItems, "phrasal");
     check(irregularItems, "irregular");
   });
 

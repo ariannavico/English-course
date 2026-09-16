@@ -47,6 +47,11 @@ export const phrasalUnits: Unit[] = [
   phr("B1", "common", "Common phrasal verbs", "Core"),
   phr("B2", "idiomatic", "Idiomatic phrasal verbs", "Advanced"),
   phr("C1", "advanced", "Advanced phrasal verbs", "Advanced"),
+  // A-Z reference absorbed from the complete list (data/lexis/phrasalReference.ts),
+  // grouped alphabetically. Level is nominal (B1) — these span all difficulties.
+  ...["b", "c", "d", "e", "f", "g", "h", "k", "l", "m", "p", "r", "s", "t", "u", "w"].map(
+    (l): Unit => phr("B1", `az-${l}`, l.toUpperCase(), "Riferimento A–Z"),
+  ),
 ];
 
 /* --------------------------- Irregular verbs ------------------------- */
