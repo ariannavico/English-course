@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { PageHeader } from "@/components/layout/PageHeader";
-import { unitService } from "@/services";
+import { unitService, reviewService } from "@/services";
 import { catalog, SECTION_LABEL } from "@/data/catalog";
 import { summariseLevels, summariseSections } from "@/services/units/UnitService";
 import type { SectionKind, Unit } from "@/types";
@@ -34,6 +34,9 @@ export function LearningDashboardPage() {
 
   const resume: Unit | undefined = catalog.find((u) => progress[u.id]?.status === "in_progress");
 
+  const reviewDue = reviewService.dueCount();
+  const reviewTracked = reviewService.all().length;
+
   return (
     <div className="stack">
       <PageHeader
@@ -53,6 +56,15 @@ export function LearningDashboardPage() {
           </div>
           <div className={styles.tileLbl}>unità completate</div>
         </div>
+        <Link to="/review" className={`${styles.tile} ${styles.tileLink}`}>
+          <div className={styles.tileVal}>
+            {reviewDue}
+            {reviewTracked > 0 && <span className={styles.of}>/{reviewTracked}</span>}
+          </div>
+          <div className={styles.tileLbl}>
+            {reviewDue > 0 ? "da ripassare ora →" : reviewTracked > 0 ? "nel ripasso →" : "ripasso →"}
+          </div>
+        </Link>
       </div>
 
       {resume && (
