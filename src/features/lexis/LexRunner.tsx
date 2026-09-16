@@ -5,6 +5,7 @@ import { unitsByCategory } from "@/data/catalog";
 import { lexItemsForUnit } from "@/data/lexis";
 import type { ReviewKind, SectionKind, Unit, UnitStatus } from "@/types";
 import { SECTION_REVIEW_KIND } from "./types";
+import { SpeakButton } from "@/components/learning/SpeakButton";
 import styles from "./lexis.module.css";
 
 const STATUS_LABEL: Record<UnitStatus, string> = {
@@ -106,6 +107,7 @@ function UnitCard({
                 <div key={i.id} className={styles.entry}>
                   <div className={styles.entryTop}>
                     <span className={styles.word}>{i.word}</span>
+                    <SpeakButton text={i.word} />
                     {i.pos && <span className={styles.pos}>{i.pos}</span>}
                     <span className={styles.it}>{i.it}</span>
                   </div>

@@ -1,0 +1,56 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.mic {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--border, #e2e2e6);
+  border-radius: 999px;
+  background: var(--surface, #fff);
+  color: var(--text, #222);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.88rem;
+  transition: border-color 0.12s, background 0.12s;
+}
+.mic:hover {
+  border-color: var(--accent, #3b5bdb);
+}
+.recording {
+  border-color: #c0392b;
+  color: #c0392b;
+  animation: pulse 1.1s ease-in-out infinite;
+}
+@keyframes pulse {
+  50% {
+    background: rgba(192, 57, 43, 0.08);
+  }
+}
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.85rem;
+}
+.heard {
+  color: var(--text-muted, #777);
+  font-style: italic;
+}
+.ok {
+  color: #2d7d46;
+  font-weight: 600;
+}
+.close {
+  color: #b9770e;
+  font-weight: 600;
+}
+.no {
+  color: #c0392b;
+  font-weight: 600;
+}

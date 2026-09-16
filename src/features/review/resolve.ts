@@ -16,6 +16,8 @@ export interface ReviewCard {
   note?: string;
   /** Human label for the kind of item. */
   kindLabel: string;
+  /** The English text to hear / practise pronouncing (undefined if none). */
+  speakText?: string;
 }
 
 const KIND_LABEL: Record<ReviewKind, string> = {
@@ -49,6 +51,7 @@ export function resolveCard(item: ReviewItem, mode: ReviewMode): ReviewCard {
       back: rule ?? "(regola non trovata)",
       example: ex,
       kindLabel,
+      speakText: ex,
     };
   }
 
@@ -58,8 +61,8 @@ export function resolveCard(item: ReviewItem, mode: ReviewMode): ReviewCard {
     if (found) {
       const { entry } = found;
       return mode === "recognition"
-        ? { front: entry.word, back: entry.it, example: entry.example, note: entry.structure, kindLabel }
-        : { front: entry.it, back: entry.word, example: entry.example, note: entry.structure, kindLabel };
+        ? { front: entry.word, back: entry.it, example: entry.example, note: entry.structure, kindLabel, speakText: entry.word }
+        : { front: entry.it, back: entry.word, example: entry.example, note: entry.structure, kindLabel, speakText: entry.word };
     }
     return { front: item.id, back: "(connettivo non trovato)", kindLabel };
   }
@@ -68,8 +71,8 @@ export function resolveCard(item: ReviewItem, mode: ReviewMode): ReviewCard {
   const lex = getLexItem(item.id);
   if (lex) {
     return mode === "recognition"
-      ? { front: lex.word, back: lex.it, example: lex.example, kindLabel }
-      : { front: lex.it, back: lex.word, example: lex.example, kindLabel };
+      ? { front: lex.word, back: lex.it, example: lex.example, kindLabel, speakText: lex.word }
+      : { front: lex.it, back: lex.word, example: lex.example, kindLabel, speakText: lex.word };
   }
 
   return { front: item.id, back: "(contenuto non trovato)", kindLabel };

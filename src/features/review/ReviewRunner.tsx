@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Badge, Button, Icon } from "@/components/ui";
 import { reviewService } from "@/services";
 import type { ReviewGrade, ReviewItem, ReviewMode } from "@/types";
+import { SpeakButton } from "@/components/learning/SpeakButton";
+import { PronounceCheck } from "@/features/pronunciation/PronounceCheck";
 import { resolveCard } from "./resolve";
 import styles from "./review.module.css";
 
@@ -138,13 +140,20 @@ export function ReviewRunner() {
 
       <div className={styles.card}>
         <Badge tone="neutral">{card.kindLabel}</Badge>
-        <div className={styles.front}>{card.front}</div>
+        <div className={styles.front}>
+          {card.front}
+          {mode === "recognition" && card.speakText && <SpeakButton text={card.speakText} size={20} />}
+        </div>
 
         {revealed ? (
           <div className={styles.answer}>
-            <div className={styles.back}>{card.back}</div>
+            <div className={styles.back}>
+              {card.back}
+              {mode === "recall" && card.speakText && <SpeakButton text={card.speakText} size={18} />}
+            </div>
             {card.note && <div className={styles.note}>{card.note}</div>}
             {card.example && <div className={styles.example}>{card.example}</div>}
+            {card.speakText && <PronounceCheck target={card.speakText} />}
           </div>
         ) : (
           <Button variant="primary" onClick={() => setRevealed(true)}>

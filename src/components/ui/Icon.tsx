@@ -23,7 +23,9 @@ export type IconName =
   | "monitor"
   | "menu"
   | "target"
-  | "arrow-right";
+  | "arrow-right"
+  | "volume"
+  | "mic";
 
 const PATHS: Record<IconName, string> = {
   home: "M3 11l9-8 9 8M5 10v10h14V10",
@@ -46,6 +48,8 @@ const PATHS: Record<IconName, string> = {
   menu: "M3 6h18M3 12h18M3 18h18",
   target: "M12 21a9 9 0 100-18 9 9 0 000 18zM12 15a3 3 0 100-6 3 3 0 000 6z",
   "arrow-right": "M5 12h14M13 6l6 6-6 6",
+  volume: "M11 5L6 9H2v6h4l5 4V5zM15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13",
+  mic: "M12 2a3 3 0 00-3 3v6a3 3 0 006 0V5a3 3 0 00-3-3zM19 10a7 7 0 01-14 0M12 17v4M8 21h8",
 };
 
 interface IconProps extends SVGProps<SVGSVGElement> {
