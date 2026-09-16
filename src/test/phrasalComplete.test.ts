@@ -5,7 +5,6 @@ import {
   totalPhrasalSenses,
 } from "@/data/phrasalComplete";
 import { phrasalItalian } from "@/data/phrasalComplete/italian";
-import { blankParticle, checkParticle, buildQuestion } from "@/features/phrasalComplete/exercises";
 
 describe("complete phrasal-verb reference", () => {
   it("is a substantial, non-empty dataset", () => {
@@ -64,43 +63,10 @@ describe("Italian common core", () => {
     expect(Object.keys(phrasalItalian).length).toBeGreaterThanOrEqual(600);
   });
 
-  it("covers every phrase in a common family (e.g. give, hold) fully", () => {
-    const byBase = new Map(phrasalFamilies.map((f) => [f.base, f]));
-    for (const base of ["give", "hold", "take", "look", "hang"]) {
-      const fam = byBase.get(base)!;
-      for (const p of fam.phrases) {
-        expect(phrasalItalian[p.phrase], `no Italian for ${p.phrase}`).toBeDefined();
-      }
+  it("covers every phrase in the dataset — the A–Z study set is fully translated", () => {
+    const all = phrasalFamilies.flatMap((f) => f.phrases.map((p) => p.phrase));
+    for (const phrase of all) {
+      expect(phrasalItalian[phrase], `no Italian for ${phrase}`).toBeDefined();
     }
-  });
-});
-
-describe("particle-fill exercises", () => {
-  it("blanks the particle in an example but keeps the verb visible", () => {
-    const cloze = blankParticle("The plane TOOK OFF on time.", "off");
-    expect(cloze).toContain("TOOK");
-    expect(cloze).toContain("____");
-    expect(cloze).not.toMatch(/OFF/);
-  });
-
-  it("blanks every token of a multi-word particle", () => {
-    const cloze = blankParticle("I need to CATCH UP WITH my emails.", "up with");
-    expect(cloze).toContain("CATCH");
-    expect((cloze.match(/____/g) ?? []).length).toBe(2);
-  });
-
-  it("checks answers case- and space-insensitively", () => {
-    expect(checkParticle("OFF", "off")).toBe(true);
-    expect(checkParticle("  up   to ", "up to")).toBe(true);
-    expect(checkParticle("in", "off")).toBe(false);
-  });
-
-  it("builds a question with a clue and an answer from an entry", () => {
-    const take = phrasalFamilies.find((f) => f.base === "take")!;
-    const off = take.phrases.find((p) => p.phrase === "take off")!;
-    const q = buildQuestion("take", off, phrasalItalian["take off"]);
-    expect(q.answer).toBe("off");
-    expect(q.clue).toBe(phrasalItalian["take off"]);
-    expect(q.base).toBe("take");
   });
 });

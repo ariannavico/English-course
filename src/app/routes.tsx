@@ -32,10 +32,6 @@ export const router = createBrowserRouter([
           import("@/pages/ExploreSectionPage").then((m) => ({ Component: m.ExploreSectionPage })),
       },
       {
-        path: "verbs/:verbId",
-        lazy: () => import("@/pages/VerbDetailPage").then((m) => ({ Component: m.VerbDetailPage })),
-      },
-      {
         path: "*",
         lazy: () => import("@/pages/NotFoundPage").then((m) => ({ Component: m.NotFoundPage })),
       },
