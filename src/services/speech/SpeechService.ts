@@ -55,9 +55,14 @@ export class SpeechService {
     const u = new SpeechSynthesisUtterance(text);
     u.lang = "en-GB";
     u.rate = opts.rate ?? 1;
-    const voices = synth.getVoices();
+    // Prefer an on-device English voice: Chrome's remote "Google" voices stream
+    // from the network and can stay silent, while the OS voice always plays.
+    const en = synth.getVoices().filter((v) => v.lang.toLowerCase().startsWith("en"));
     const voice =
-      voices.find((v) => v.lang === "en-GB") ?? voices.find((v) => v.lang.startsWith("en"));
+      en.find((v) => v.lang === "en-GB" && v.localService) ??
+      en.find((v) => v.localService) ??
+      en.find((v) => v.lang === "en-GB") ??
+      en[0];
     if (voice) u.voice = voice;
     const done = () => {
       this.current = null;
