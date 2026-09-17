@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Badge, Button, Icon } from "@/components/ui";
 import { reviewService, unitService } from "@/services";
 import { unitsByCategory } from "@/data/catalog";
 import { lexItemsForUnit } from "@/data/lexis";
 import type { ReviewKind, SectionKind, Unit, UnitStatus } from "@/types";
-import { SECTION_REVIEW_KIND } from "./types";
+import { SECTION_REVIEW_KIND, type LexItem } from "./types";
+import { buildLexTest, type LexQuestion } from "./miniTest";
 import { SpeakButton } from "@/components/learning/SpeakButton";
 import styles from "./lexis.module.css";
 
@@ -25,6 +26,12 @@ export function LexRunner({ section, readOnly = false }: { section: SectionKind;
   const [, setV] = useState(0);
   const refresh = () => setV((v) => v + 1);
 
+  // All the section's words, used as the distractor pool for mini-test options.
+  const sectionPool = useMemo<LexItem[]>(
+    () => unitsByCategory(section).flatMap((g) => g.units).flatMap((u) => lexItemsForUnit(u.id)),
+    [section],
+  );
+
   return (
     <div className={styles.wrap}>
       {groups.map(({ category, units }) => (
@@ -32,7 +39,14 @@ export function LexRunner({ section, readOnly = false }: { section: SectionKind;
           {category !== "—" && <h2 className={styles.groupTitle}>{category}</h2>}
           <div className={styles.cards}>
             {units.map((u) => (
-              <UnitCard key={u.id} unit={u} kind={kind} onChange={refresh} readOnly={readOnly} />
+              <UnitCard
+                key={u.id}
+                unit={u}
+                kind={kind}
+                pool={sectionPool}
+                onChange={refresh}
+                readOnly={readOnly}
+              />
             ))}
           </div>
         </section>
@@ -44,11 +58,13 @@ export function LexRunner({ section, readOnly = false }: { section: SectionKind;
 function UnitCard({
   unit,
   kind,
+  pool,
   onChange,
   readOnly,
 }: {
   unit: Unit;
   kind: ReviewKind;
+  pool: LexItem[];
   onChange: () => void;
   readOnly: boolean;
 }) {
@@ -58,6 +74,7 @@ function UnitCard({
   const status: UnitStatus = progress?.status ?? "not_started";
   const tone = status === "completed" ? "success" : status === "in_progress" ? "primary" : "neutral";
   const inReview = items.length > 0 && items.every((i) => reviewService.get(i.id) != null);
+  const hasTest = items.length >= 3; // need enough words for a meaningful quiz
 
   function toggle() {
     const next = !open;
@@ -67,8 +84,8 @@ function UnitCard({
       onChange();
     }
   }
-  function complete() {
-    unitService.complete(unit, "study");
+  function complete(by: "study" | "assessment" = "study") {
+    unitService.complete(unit, by);
     onChange();
   }
   function reopen() {
@@ -118,31 +135,148 @@ function UnitCard({
           )}
 
           {!readOnly && (
-            <div className={styles.actions}>
-              {items.length > 0 && (
-                <Button
-                  size="sm"
-                  variant={inReview ? "ghost" : "primary"}
-                  onClick={addToReview}
-                  disabled={inReview}
-                >
-                  <Icon name="repeat" size={16} />{" "}
-                  {inReview ? "Nel ripasso ✓" : `Aggiungi al ripasso (${items.length})`}
-                </Button>
+            <>
+              {hasTest && (
+                <LexMiniTest
+                  items={items}
+                  pool={pool}
+                  status={status}
+                  onComplete={() => complete("assessment")}
+                  onReopen={reopen}
+                />
               )}
-              {status === "completed" ? (
-                <Button size="sm" variant="ghost" onClick={reopen} style={{ marginLeft: "auto" }}>
-                  Ripassa di nuovo
-                </Button>
-              ) : (
-                <Button size="sm" variant="primary" onClick={complete} style={{ marginLeft: "auto" }}>
-                  <Icon name="check" size={16} /> Segna come completato
-                </Button>
-              )}
-            </div>
+              <div className={styles.actions}>
+                {items.length > 0 && (
+                  <Button
+                    size="sm"
+                    variant={inReview ? "ghost" : "primary"}
+                    onClick={addToReview}
+                    disabled={inReview}
+                  >
+                    <Icon name="repeat" size={16} />{" "}
+                    {inReview ? "Nel ripasso ✓" : `Aggiungi al ripasso (${items.length})`}
+                  </Button>
+                )}
+                {status === "completed" ? (
+                  <Button size="sm" variant="ghost" onClick={reopen} style={{ marginLeft: "auto" }}>
+                    Ripassa di nuovo
+                  </Button>
+                ) : (
+                  !hasTest && (
+                    <Button
+                      size="sm"
+                      variant="primary"
+                      onClick={() => complete("study")}
+                      style={{ marginLeft: "auto" }}
+                    >
+                      <Icon name="check" size={16} /> Segna come completato
+                    </Button>
+                  )
+                )}
+              </div>
+            </>
           )}
         </div>
       )}
+    </div>
+  );
+}
+
+/**
+ * Word-list mini-test: for each of up to five words, pick the right Italian
+ * meaning. Completing it (any score) marks the unit as verified (assessment);
+ * "Riprova" reshuffles a fresh set of words and options.
+ */
+function LexMiniTest({
+  items,
+  pool,
+  status,
+  onComplete,
+  onReopen,
+}: {
+  items: LexItem[];
+  pool: LexItem[];
+  status: UnitStatus;
+  onComplete: () => void;
+  onReopen: () => void;
+}) {
+  const [nonce, setNonce] = useState(0);
+  const questions: LexQuestion[] = useMemo(
+    () => buildLexTest(items, pool, 5),
+    [items, pool, nonce],
+  );
+  const [answers, setAnswers] = useState<(number | null)[]>(() => questions.map(() => null));
+  const [checked, setChecked] = useState(false);
+
+  const score = answers.filter((a, i) => a === questions[i]?.answer).length;
+  const allAnswered = answers.length === questions.length && answers.every((a) => a !== null);
+
+  function regenerate() {
+    setNonce((n) => n + 1);
+    setAnswers(questions.map(() => null));
+    setChecked(false);
+  }
+
+  return (
+    <div className={styles.test}>
+      <p className={styles.testTitle}>Mini-test</p>
+      {questions.map((q, qi) => (
+        <div key={qi} className={styles.q}>
+          <div className={styles.qPrompt}>
+            {q.prompt}
+            {q.pos && <span className={styles.qPos}>{q.pos}</span>}
+          </div>
+          <div className={styles.opts}>
+            {q.options.map((opt, oi) => {
+              const selected = answers[qi] === oi;
+              const isAnswer = q.answer === oi;
+              let cls = styles.opt;
+              if (checked) {
+                if (isAnswer) cls = `${styles.opt} ${styles.optRight}`;
+                else if (selected) cls = `${styles.opt} ${styles.optWrong}`;
+              } else if (selected) {
+                cls = `${styles.opt} ${styles.optSel}`;
+              }
+              return (
+                <button
+                  key={oi}
+                  className={cls}
+                  disabled={checked}
+                  onClick={() => setAnswers((a) => a.map((v, i) => (i === qi ? oi : v)))}
+                >
+                  {opt}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+
+      <div className={styles.actions}>
+        {!checked ? (
+          <Button size="sm" variant="primary" onClick={() => setChecked(true)} disabled={!allAnswered}>
+            Verifica
+          </Button>
+        ) : (
+          <>
+            <Badge tone={score === questions.length ? "success" : "primary"}>
+              {score}/{questions.length} corrette
+            </Badge>
+            <Button size="sm" variant="ghost" onClick={regenerate}>
+              <Icon name="repeat" size={16} /> Riprova
+            </Button>
+            {status === "completed" ? (
+              <Button size="sm" variant="ghost" onClick={onReopen} style={{ marginLeft: "auto" }}>
+                Riapri
+              </Button>
+            ) : (
+              <Button size="sm" variant="primary" onClick={onComplete} style={{ marginLeft: "auto" }}>
+                <Icon name="check" size={16} /> Completa
+              </Button>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 }

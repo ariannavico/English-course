@@ -11,6 +11,30 @@ import {
   irregularItems,
 } from "@/data/lexis";
 import { getUnit } from "@/data/catalog";
+import { buildLexTest } from "@/features/lexis/miniTest";
+
+describe("lex mini-test generator", () => {
+  const items = lexItemsForUnit("vb-everyday");
+  const pool = verbItems;
+
+  it("makes one question per word (capped) with the meaning among the options", () => {
+    const qs = buildLexTest(items, pool, 5);
+    expect(qs.length).toBe(Math.min(5, items.length));
+    for (const q of qs) {
+      expect(q.options.length).toBeGreaterThan(1);
+      expect(q.options[q.answer]).toBeDefined();
+      // the flagged answer is the real Italian meaning of the prompted word
+      const word = items.find((i) => i.word === q.prompt)!;
+      expect(q.options[q.answer]).toBe(word.it);
+      expect(new Set(q.options).size).toBe(q.options.length); // no duplicate options
+    }
+  });
+
+  it("is deterministic given a fixed RNG", () => {
+    const rnd = () => 0.42;
+    expect(buildLexTest(items, pool, 3, rnd)).toEqual(buildLexTest(items, pool, 3, rnd));
+  });
+});
 
 describe("lexical content", () => {
   it("ids are unique and every item links to a real catalog Unit", () => {
