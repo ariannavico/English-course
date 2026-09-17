@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Badge, Button, Icon } from "@/components/ui";
 import { reviewService, unitService } from "@/services";
 import { unitsByCategory } from "@/data/catalog";
@@ -23,6 +23,15 @@ export function GrammarRunner({ readOnly = false }: { readOnly?: boolean }) {
   const [, setV] = useState(0);
   const refresh = () => setV((v) => v + 1);
 
+  // Which chapter is open (lifted so completing one opens the next).
+  const orderedIds = useMemo(() => groups.flatMap((g) => g.units.map((u) => u.id)), [groups]);
+  const [openId, setOpenId] = useState<string | null>(null);
+  const toggle = (id: string) => setOpenId((cur) => (cur === id ? null : id));
+  const openNext = (id: string) => {
+    const i = orderedIds.indexOf(id);
+    setOpenId(orderedIds[i + 1] ?? null);
+  };
+
   return (
     <div className={styles.wrap}>
       {groups.map(({ category, units }) => (
@@ -30,7 +39,15 @@ export function GrammarRunner({ readOnly = false }: { readOnly?: boolean }) {
           <h2 className={styles.groupTitle}>{category}</h2>
           <div className={styles.cards}>
             {units.map((u) => (
-              <ChapterCard key={u.id} unit={u} onChange={refresh} readOnly={readOnly} />
+              <ChapterCard
+                key={u.id}
+                unit={u}
+                open={openId === u.id}
+                onToggle={() => toggle(u.id)}
+                onCompleted={() => openNext(u.id)}
+                onChange={refresh}
+                readOnly={readOnly}
+              />
             ))}
           </div>
         </section>
@@ -39,25 +56,40 @@ export function GrammarRunner({ readOnly = false }: { readOnly?: boolean }) {
   );
 }
 
-function ChapterCard({ unit, onChange, readOnly }: { unit: Unit; onChange: () => void; readOnly: boolean }) {
-  const [open, setOpen] = useState(false);
+function ChapterCard({
+  unit,
+  open,
+  onToggle,
+  onCompleted,
+  onChange,
+  readOnly,
+}: {
+  unit: Unit;
+  open: boolean;
+  onToggle: () => void;
+  onCompleted: () => void;
+  onChange: () => void;
+  readOnly: boolean;
+}) {
   const lesson = getGrammarLesson(unit.id);
   const progress = unitService.get(unit.id);
   const status: UnitStatus = progress?.status ?? "not_started";
   const tone = status === "completed" ? "success" : status === "in_progress" ? "primary" : "neutral";
 
-  function toggle() {
-    const next = !open;
-    setOpen(next);
-    if (next && !readOnly && status === "not_started") {
+  // Start the chapter the first time it's opened.
+  useEffect(() => {
+    if (open && !readOnly && status === "not_started") {
       unitService.start(unit);
       onChange();
     }
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
   function complete() {
     unitService.complete(unit, "study");
     reviewService.ensure(unit.id, "grammar", "grammar");
     onChange();
+    onCompleted(); // close this chapter and open the next
   }
   function reopen() {
     unitService.reopen(unit.id);
@@ -66,7 +98,7 @@ function ChapterCard({ unit, onChange, readOnly }: { unit: Unit; onChange: () =>
 
   return (
     <div className={styles.card}>
-      <button className={styles.head} aria-expanded={open} onClick={toggle}>
+      <button className={styles.head} aria-expanded={open} onClick={onToggle}>
         <span className={styles.title}>{unit.title}</span>
         <Badge tone="neutral">{unit.level}</Badge>
         {!readOnly && (

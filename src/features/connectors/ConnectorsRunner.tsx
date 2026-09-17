@@ -1,9 +1,10 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Badge, Button, Icon } from "@/components/ui";
 import { reviewService, unitService } from "@/services";
 import { unitsByCategory } from "@/data/catalog";
 import { getConnectorFunction } from "@/data/connectors/items";
 import type { Unit, UnitStatus } from "@/types";
+import { SpeakButton } from "@/components/learning/SpeakButton";
 import styles from "./connectors.module.css";
 
 const STATUS_LABEL: Record<UnitStatus, string> = {
@@ -20,6 +21,15 @@ export function ConnectorsRunner({ readOnly = false }: { readOnly?: boolean }) {
   const [, setV] = useState(0);
   const refresh = () => setV((v) => v + 1);
 
+  // Which function is open (lifted so completing one opens the next).
+  const orderedIds = useMemo(() => groups.flatMap((g) => g.units.map((u) => u.id)), [groups]);
+  const [openId, setOpenId] = useState<string | null>(null);
+  const toggle = (id: string) => setOpenId((cur) => (cur === id ? null : id));
+  const openNext = (id: string) => {
+    const i = orderedIds.indexOf(id);
+    setOpenId(orderedIds[i + 1] ?? null);
+  };
+
   return (
     <div className={styles.wrap}>
       {groups.map(({ category, units }) => (
@@ -27,7 +37,15 @@ export function ConnectorsRunner({ readOnly = false }: { readOnly?: boolean }) {
           <h2 className={styles.groupTitle}>{category}</h2>
           <div className={styles.cards}>
             {units.map((unit) => (
-              <FunctionCard key={unit.id} unit={unit} onChange={refresh} readOnly={readOnly} />
+              <FunctionCard
+                key={unit.id}
+                unit={unit}
+                open={openId === unit.id}
+                onToggle={() => toggle(unit.id)}
+                onCompleted={() => openNext(unit.id)}
+                onChange={refresh}
+                readOnly={readOnly}
+              />
             ))}
           </div>
         </section>
@@ -36,9 +54,22 @@ export function ConnectorsRunner({ readOnly = false }: { readOnly?: boolean }) {
   );
 }
 
-function FunctionCard({ unit, onChange, readOnly }: { unit: Unit; onChange: () => void; readOnly: boolean }) {
+function FunctionCard({
+  unit,
+  open,
+  onToggle,
+  onCompleted,
+  onChange,
+  readOnly,
+}: {
+  unit: Unit;
+  open: boolean;
+  onToggle: () => void;
+  onCompleted: () => void;
+  onChange: () => void;
+  readOnly: boolean;
+}) {
   const content = getConnectorFunction(unit.id);
-  const [open, setOpen] = useState(false);
   const progress = unitService.get(unit.id);
   const status: UnitStatus = progress?.status ?? "not_started";
 
@@ -46,18 +77,19 @@ function FunctionCard({ unit, onChange, readOnly }: { unit: Unit; onChange: () =
     ? content.connectors.every((c) => reviewService.get(c.id) != null)
     : false;
 
-  function toggle() {
-    const next = !open;
-    setOpen(next);
-    if (next && !readOnly && status === "not_started") {
+  // Start the function the first time it's opened.
+  useEffect(() => {
+    if (open && !readOnly && status === "not_started") {
       unitService.start(unit);
       onChange();
     }
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
 
   function complete() {
     unitService.complete(unit, "study");
     onChange();
+    onCompleted(); // close this card and open the next
   }
   function reopen() {
     unitService.reopen(unit.id);
@@ -73,7 +105,7 @@ function FunctionCard({ unit, onChange, readOnly }: { unit: Unit; onChange: () =
 
   return (
     <div className={styles.card}>
-      <button className={styles.head} aria-expanded={open} onClick={toggle}>
+      <button className={styles.head} aria-expanded={open} onClick={onToggle}>
         <span className={styles.fn}>{content?.fn ?? unit.title}</span>
         <Badge tone="neutral">{unit.level}</Badge>
         {!readOnly && (
@@ -93,6 +125,7 @@ function FunctionCard({ unit, onChange, readOnly }: { unit: Unit; onChange: () =
               <div key={c.id} className={styles.entry}>
                 <div className={styles.entryTop}>
                   <span className={styles.word}>{c.word}</span>
+                  <SpeakButton text={c.word} />
                   <span className={styles.it}>{c.it}</span>
                 </div>
                 <div className={styles.struct}>{c.structure}</div>

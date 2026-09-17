@@ -11,6 +11,19 @@ export class SpeechService {
   private synth: SpeechSynthesis | null =
     typeof window !== "undefined" ? window.speechSynthesis ?? null : null;
 
+  /** Kept so the utterance isn't garbage-collected mid-speech (a Chrome bug that
+   * otherwise cuts playback short or stops it starting at all). */
+  private current: SpeechSynthesisUtterance | null = null;
+
+  constructor() {
+    // Voices load lazily in some browsers; prime the list so the first click can
+    // pick an English voice instead of falling back silently.
+    if (this.synth) {
+      this.synth.getVoices();
+      this.synth.addEventListener?.("voiceschanged", () => this.synth?.getVoices());
+    }
+  }
+
   canSpeak(): boolean {
     return this.synth !== null;
   }
@@ -22,21 +35,39 @@ export class SpeechService {
     );
   }
 
-  /** Speak text with a British English voice. Cancels anything already playing. */
+  /** Speak text with a British English voice. Interrupts anything already playing. */
   speak(text: string, opts: { rate?: number; onEnd?: () => void } = {}): void {
-    if (!this.synth) {
+    const synth = this.synth;
+    if (!synth) {
       opts.onEnd?.();
       return;
     }
-    this.synth.cancel();
+    // Chrome can leave synthesis paused after inactivity — make sure it's running.
+    try {
+      synth.resume();
+    } catch {
+      /* not all engines implement resume */
+    }
+    // Only cancel when something is actually playing: calling cancel() right
+    // before speak() on an idle engine can swallow the new utterance (Chrome bug).
+    if (synth.speaking || synth.pending) synth.cancel();
+
     const u = new SpeechSynthesisUtterance(text);
     u.lang = "en-GB";
     u.rate = opts.rate ?? 1;
-    if (opts.onEnd) u.onend = () => opts.onEnd?.();
-    // Prefer an English voice if the system offers one.
-    const voice = this.synth.getVoices().find((v) => v.lang.startsWith("en"));
+    const voices = synth.getVoices();
+    const voice =
+      voices.find((v) => v.lang === "en-GB") ?? voices.find((v) => v.lang.startsWith("en"));
     if (voice) u.voice = voice;
-    this.synth.speak(u);
+    const done = () => {
+      this.current = null;
+      opts.onEnd?.();
+    };
+    u.onend = done;
+    u.onerror = done;
+    if (this.current) this.current.onend = null; // detach the previous utterance
+    this.current = u; // retain against garbage collection until it finishes
+    synth.speak(u);
   }
 
   stopSpeaking(): void {
